@@ -53,7 +53,6 @@ public class HomePageTest {
         checkTitle(driver, "Home Page");
 
         //7 Assert that there are 4 items on the header section are displayed and they have proper texts
-        //TODO REDO "HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"
         WebElement navigateBar = driver.findElement(By.cssSelector(".uui-navigation"));
         WebElement element = navigateBar.findElement(By.cssSelector("[href='index.html']"));
         assertEquals(element.getText(), "HOME");
