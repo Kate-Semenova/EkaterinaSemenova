@@ -103,7 +103,7 @@ public class HomePageTest {
         //13 Assert that there is Left Section
         assertTrue(driver.findElement(By.cssSelector("[name = 'navigation-sidebar']")).isDisplayed());
 
-        //14 Assert that there is Footer
+        //14 Assert that there is Footer.
         assertTrue(driver.findElement(By.cssSelector(".footer-content")).isDisplayed());
         //15 Close Browser
         driver.close();
