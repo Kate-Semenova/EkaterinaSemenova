@@ -21,6 +21,7 @@ import static org.testng.Assert.*;
 public class HomePageTest {
     private String title = "Home Page";
 
+    //1 Create a new test
     @Test
     public void shouldPerformLoggingInCorrectly() {
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
