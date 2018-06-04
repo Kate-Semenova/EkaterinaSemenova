@@ -19,7 +19,8 @@ import static org.testng.Assert.assertTrue;
  */
 public class HomePageWithAnnotationTest extends HomePageTestBase {
 
-    WebDriver driver;
+    private WebDriver driver;
+    private String title = "Home Page";
 
     @BeforeClass
     public void beforeClass() {
@@ -27,9 +28,8 @@ public class HomePageWithAnnotationTest extends HomePageTestBase {
     }
 
     @BeforeMethod
-    public void beforeEachMethod() {
+    public void beforeMethod() {
         driver.manage().window().maximize();
-
     }
 
     @AfterMethod
@@ -40,9 +40,8 @@ public class HomePageWithAnnotationTest extends HomePageTestBase {
     @AfterClass
     public void afterClass() {
         driver.close();
+        //org.openqa.selenium.os.WindowsUtils.killByName("chromedriver.exe");
     }
-
-    private String title = "Home Page";
 
     //1 Create a new test
     @Test
@@ -76,6 +75,7 @@ public class HomePageWithAnnotationTest extends HomePageTestBase {
         checkTitle(driver, title);
 
         //7 Assert that there are 4 items on the header section are displayed and they have proper texts
+
         List<WebElement> navigateBarElements = driver.findElements(By.cssSelector(".nav > li"));
         Assert.assertEquals(navigateBarElements.size(), 4);
         assertEquals(navigateBarElements.get(0).getText(), "HOME");

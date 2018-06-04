@@ -6,54 +6,58 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Екатерина on 28.05.2018.
+ * Created by Ekaterina on 28.05.2018.
  */
+
 public class HomePageTextTest {
     private ChromeOptions options;
-  //  private ;
-    private String css = ".benefit-txt";
-    private String url = "https://epam.github.io/JDI/index.html";
-
+    private final String TEXT_LOCATOR = ".benefit-txt";
+    private final String URL = "https://epam.github.io/JDI/index.html";
+    private  WebDriver driver;
+    List<WebElement> imageAndTextDivs;
     @DataProvider(parallel = true)
-    public Object[][] textInformation(){
+    public Object[][] textInformation() {
         return new Object[][]{
                 {0, "To include good practices\nand ideas from successful\nEPAM project"},
-                {1,"To be flexible and\ncustomizable"},
-                {2,"To be multiplatform"},
-                {3,"Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…"}
+                {1, "To be flexible and\ncustomizable"},
+                {2, "To be multiplatform"},
+                {3, "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…"}
         };
     }
+
+    //TODO Should check spelling
     @BeforeClass
-    public void setUpConfigurs(){
+    public void setUpConfigurations() {
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        //TODO learn about options
+        HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", "target");
         options = new ChromeOptions();
         options.setExperimentalOption("prefs", chromePrefs);
-
-    }
-    @BeforeMethod
-    public void before(){
-    }
-
-    @AfterMethod
-    public void after(){
-    }
-
-    @Test (dataProvider = "textInformation")
-    public void textTest(int i, String text){
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.navigate().to(url);
-        List<WebElement> imageAndTextDivs = driver.findElements(By.cssSelector(css));
-        Assert.assertEquals(imageAndTextDivs.get(i).getText(), text);
+        //Open "https://epam.github.io/JDI/index.html"
+        driver.navigate().to(URL);
+        imageAndTextDivs = driver.findElements(By.cssSelector(TEXT_LOCATOR)); // must be named
+    }
+    @AfterClass
+    public void closeDriver(){
+        //Close browser
         driver.close();
+    }
 
+    @Test(dataProvider = "textInformation")
+    public void textTest(int i, String text) {
+        //Assert that there are 4 texts on the Index Page under icons and they have proper text
+        Assert.assertEquals(imageAndTextDivs.get(i).getText(), text);
     }
 }
