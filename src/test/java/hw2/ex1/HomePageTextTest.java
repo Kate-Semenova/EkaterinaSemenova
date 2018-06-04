@@ -22,8 +22,9 @@ public class HomePageTextTest {
     private ChromeOptions options;
     private final String TEXT_LOCATOR = ".benefit-txt";
     private final String URL = "https://epam.github.io/JDI/index.html";
-    private  WebDriver driver;
+    private WebDriver driver;
     List<WebElement> imageAndTextDivs;
+
     @DataProvider(parallel = true)
     public Object[][] textInformation() {
         return new Object[][]{
@@ -47,10 +48,11 @@ public class HomePageTextTest {
         driver.manage().window().maximize();
         //Open "https://epam.github.io/JDI/index.html"
         driver.navigate().to(URL);
-        imageAndTextDivs = driver.findElements(By.cssSelector(TEXT_LOCATOR)); // must be named
+        imageAndTextDivs = driver.findElements(By.cssSelector(TEXT_LOCATOR));
     }
+
     @AfterClass
-    public void closeDriver(){
+    public void closeDriver() {
         //Close browser
         driver.close();
     }
