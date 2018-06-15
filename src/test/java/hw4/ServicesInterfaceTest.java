@@ -30,12 +30,10 @@ public class ServicesInterfaceTest extends SuiteBase {
 
     @Test(dataProvider = "information")
     public void sliderTest(int from, int to) {
-
         //5 Range sliders
         datesPage.setHandles(from, to);
 
         //6 Assert that for "From" and "To" sliders there are logs rows with corresponding values
         datesPage.checkLogsValues(from, to);
-
     }
 }

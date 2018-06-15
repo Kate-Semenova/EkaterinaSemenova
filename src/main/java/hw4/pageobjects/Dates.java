@@ -35,7 +35,11 @@ public class Dates {
     }
 
     public void checkLogsValues(int from, int to) {
-
+        System.out.println(logCollection.size());
+        for (SelenideElement log: logCollection
+             ) {
+            System.out.println(log.getText());
+        }
         logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + to + ".*"));
         logCollection.get(1).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + from + ".*"));
     }
