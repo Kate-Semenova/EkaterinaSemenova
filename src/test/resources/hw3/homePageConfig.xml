@@ -6,7 +6,7 @@
         <parameter name="name" value="PITER CHAILOVSKII"/>
 
         <classes>
-            <class name="hw3.HomePageWithPageObjectTest"/>
+            <class name="hw3.HomePageLoginTest"/>
         </classes>
     </test>
 </suite>

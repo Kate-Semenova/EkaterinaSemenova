@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by Екатерина on 01.06.2018.
  */
-public class HomePageWithAnnotationTest extends HomePageTestBase {
+public class HomePageWithAnnotationTest extends TestBase {
 
     private WebDriver driver;
     private String title = "Home Page";

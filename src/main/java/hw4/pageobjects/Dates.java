@@ -35,7 +35,8 @@ public class Dates {
     }
 
     public void checkLogsValues(int from, int to) {
-        logCollection.get(logCollection.size() - 2).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + to + ".*"));
-        logCollection.get(logCollection.size() - 1).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + from + ".*"));
+
+        logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + to + ".*"));
+        logCollection.get(1).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + from + ".*"));
     }
 }

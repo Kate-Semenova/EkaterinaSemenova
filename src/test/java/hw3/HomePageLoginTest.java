@@ -1,7 +1,6 @@
 package hw3;
 
-import com.beust.jcommander.Parameter;
-import hw2.ex3.HomePageTestBase;
+import hw2.ex3.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,8 +15,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Created by Ekaterina on 01.06.2018.
  */
-public class HomePageWithPageObjectTest extends HomePageTestBase {
-    private String title = "Home Page";
+public class HomePageLoginTest extends TestBase {
     private HomePage homePage;
     private ChromeOptions options;
     private WebDriver driver;
@@ -44,7 +42,7 @@ public class HomePageWithPageObjectTest extends HomePageTestBase {
         homePage.open(driver);
 
         //3 Assert Browser title
-        homePage.checkHomePageTitle(driver, title);
+        homePage.checkHomePageTitle(driver);
 
         //4 Perform login
         homePage.logIn(login, password);
@@ -53,7 +51,7 @@ public class HomePageWithPageObjectTest extends HomePageTestBase {
         homePage.checkUserName(name);
 
         //6 Assert Browser title
-        homePage.checkHomePageTitle(driver, title);
+        homePage.checkHomePageTitle(driver);
 
         //7 Assert that there are 4 items on the header section are displayed and they have proper texts
         homePage.checkNavigationBar();

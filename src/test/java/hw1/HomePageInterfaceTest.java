@@ -18,25 +18,24 @@ import static org.testng.Assert.*;
  * Created by Ekaterina on 23.05.2018.
  *
  */
-public class HomePageTest {
+public class HomePageInterfaceTest {
     private String title = "Home Page";
 
     //1 Create a new test
     @Test
     public void shouldPerformLoggingInCorrectly() {
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", "target");
 
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", chromePrefs);
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
         //2 Open test site by URL
         driver.navigate().to("https://epam.github.io/JDI/");
-
 
         //3 Assert Browser title
         checkTitle(driver, title);
@@ -73,9 +72,11 @@ public class HomePageTest {
 
         List<WebElement> texts = driver.findElements(By.cssSelector(".benefit-txt"));
         Assert.assertEquals(texts.size(), 4);
+
         for (WebElement text : texts) {
             assertTrue(text.isDisplayed());
         }
+
         assertEquals(texts.get(0).getText(), "To include good practices\n" +
                 "and ideas from successful\n" +
                 "EPAM project");
@@ -92,6 +93,7 @@ public class HomePageTest {
         for (WebElement text : centerTexts) {
             assertTrue(text.isDisplayed());
         }
+
         //11 Assert a text of the sub header
         assertEquals(centerTexts.get(0).getText(), "EPAM FRAMEWORK WISHES…");
         assertEquals(centerTexts.get(1).getText(),
@@ -99,8 +101,7 @@ public class HomePageTest {
                 "SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. " +
                 "UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS " +
                 "NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN " +
-                "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR."
-        );
+                "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
         assertEquals(centerTexts.get(2).getText(), "JDI GITHUB");
 
         //12 Assert that JDI GITHUB is a link and has a proper URL
@@ -116,7 +117,7 @@ public class HomePageTest {
         //15 Close Browser
         driver.close();
     }
-
+//nafig ne nuzhen
     private void checkTitle(WebDriver driver, String title) {
         assertEquals(driver.getTitle(), title);
     }

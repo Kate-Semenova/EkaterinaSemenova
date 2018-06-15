@@ -23,7 +23,7 @@ public class HomePageTextTest {
     private final String TEXT_LOCATOR = ".benefit-txt";
     private final String URL = "https://epam.github.io/JDI/index.html";
     private WebDriver driver;
-    List<WebElement> imageAndTextDivs;
+    private List<WebElement> imageAndTextDivs;
 
     @DataProvider(parallel = true)
     public Object[][] textInformation() {

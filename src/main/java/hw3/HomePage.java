@@ -15,6 +15,7 @@ import static org.testng.Assert.assertTrue;
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
+    private final String title = "Home Page";
     @FindBy(css = ".profile-photo")
     private WebElement userIcon;
 
@@ -60,7 +61,7 @@ public class HomePage {
         assertEquals(userIcon.getText(), text);
     }
 
-    public void checkHomePageTitle(WebDriver driver, String title) {
+    public void checkHomePageTitle(WebDriver driver) {
         assertEquals(driver.getTitle(), title);
     }
 
@@ -106,6 +107,7 @@ public class HomePage {
 
 
     public void checkTextsOnMainHeaderAreDisplayed() {
+        assertEquals(centerTexts.size(), 4);
         for (WebElement text : centerTexts) {
             assertTrue(text.isDisplayed());
         }
