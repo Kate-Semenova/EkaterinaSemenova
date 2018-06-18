@@ -2,8 +2,8 @@
 <suite name="Suite" verbose="1">
     <test name="Test">
         <classes>
-            <class name="hw4.LoginTest"/>
-            <class name="hw4.ServicesInterfaceTest"/>
+            <class name="hw4.DatesPageTest"/>
+            <class name="hw4.DifferentElementsPageTest"/>
         </classes>
     </test>
 </suite>
