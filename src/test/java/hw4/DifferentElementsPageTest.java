@@ -18,7 +18,7 @@ import static hw4.enums.Radio.SELEN;
 import static hw4.enums.User.PITER_CHAILOVSKII;
 
 /**
- * Created by Екатерина on 18.06.2018.
+ * Created by Ekaterina on 18.06.2018.
  */
 public class DifferentElementsPageTest extends ServiceSuiteBase {
     private HomePage homePage;
@@ -66,11 +66,13 @@ public class DifferentElementsPageTest extends ServiceSuiteBase {
 
         //6 Assert that there is Right Section
         differentElementPage.shouldHasRightSection();
+
         //7 Assert that there is Left Section
         differentElementPage.shouldHasLeftSection();
 
         //8 Select elements: checkBoxes, radio, dropdown, checkBoxes
         differentElementPage.select(elements);
+
         //9 Assert there is an individual log row
         differentElementPage.shouldHasCorrectLogRow(elements);
     }
