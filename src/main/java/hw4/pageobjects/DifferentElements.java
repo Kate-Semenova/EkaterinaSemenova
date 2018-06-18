@@ -96,8 +96,6 @@ public class DifferentElements {
         } else {
             for (int i = 0; i < elements.length; i++) {
                 CheckBox newObject = (CheckBox) elements[elements.length - 1 - i];
-              //  SelenideElement se =(SelenideElement) .findElements(By.cssSelector("input"));
-               // System.out.println(se.is(checked));
                 logCollection.get(i).should(matchText("\\d\\d:\\d\\d:\\d\\d "
                                 + newObject.name + ": condition changed to "
                         + checkBoxes.get(newObject.index).is(checked)
