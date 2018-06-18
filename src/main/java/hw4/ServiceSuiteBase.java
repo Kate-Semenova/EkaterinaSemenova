@@ -20,9 +20,5 @@ public class ServiceSuiteBase {
         Configuration.collectionsPollingInterval = 350;
         Configuration.startMaximized = true;
     }
-    @AfterSuite(alwaysRun = true)
-    public void closeBrowser(){
-        //7 Close browser
-        close();
-    }
+
 }

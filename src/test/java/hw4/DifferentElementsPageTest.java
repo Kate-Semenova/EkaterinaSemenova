@@ -5,13 +5,12 @@ import hw4.enums.DropDown;
 import hw4.enums.Radio;
 import hw4.pageobjects.DifferentElements;
 import hw4.pageobjects.HomePage;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.page;
 import static hw4.enums.CheckBox.*;
 import static hw4.enums.DropDown.*;
@@ -21,7 +20,7 @@ import static hw4.enums.User.PITER_CHAILOVSKII;
 /**
  * Created by Екатерина on 18.06.2018.
  */
-public class DifferentElementsPageTest extends ServiceSuiteBase{
+public class DifferentElementsPageTest extends ServiceSuiteBase {
     private HomePage homePage;
 
     @DataProvider
@@ -31,11 +30,12 @@ public class DifferentElementsPageTest extends ServiceSuiteBase{
                 {WATER, WIND},
                 {SELEN},
                 {YELLOW},
-                {WATER,WIND}
+                {WATER, WIND}
         };
     }
-    @BeforeClass (alwaysRun = true)
-    public void login(){
+
+    @BeforeClass(alwaysRun = true)
+    public void login() {
         homePage = page(HomePage.class);
         //1 Open test site by URL
         homePage.open();
@@ -50,8 +50,15 @@ public class DifferentElementsPageTest extends ServiceSuiteBase{
         homePage.openService();
         homePage.openDifferentElementsPage();
     }
+
+    @AfterClass(alwaysRun = true)
+    public void closeBrowser() {
+        //7 Close browser
+        close();
+    }
+
     @Test(dataProvider = "information")
-    public void elementsTest(Object [] elements) throws InterruptedException {
+    public void elementsTest(Object[] elements) throws InterruptedException {
 
         //5 Check interface on Different elements page, it contains all needed elements
         DifferentElements differentElementPage = page(DifferentElements.class);
@@ -64,8 +71,8 @@ public class DifferentElementsPageTest extends ServiceSuiteBase{
 
         //8 Select elements: checkBoxes, radio, dropdown, checkBoxes
         differentElementPage.select(elements);
-       //9 Assert there is an individual log row
-       // Thread.sleep(5000);
+        //9 Assert there is an individual log row
+        // Thread.sleep(5000);
         differentElementPage.shouldHasCorrectLogRow(elements);
     }
 }

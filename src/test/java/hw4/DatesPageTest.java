@@ -2,10 +2,12 @@ package hw4;
 
 import hw4.pageobjects.Dates;
 import hw4.pageobjects.HomePage;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.page;
 import static hw4.enums.User.PITER_CHAILOVSKII;
 
@@ -26,8 +28,8 @@ public class DatesPageTest extends ServiceSuiteBase {
         };
     }
 
-    @BeforeClass (alwaysRun = true)
-    public void login(){
+    @BeforeClass(alwaysRun = true)
+    public void login() {
         homePage = page(HomePage.class);
         //1 Open test site by URL
         homePage.open();
@@ -42,6 +44,13 @@ public class DatesPageTest extends ServiceSuiteBase {
         homePage.openService();
         homePage.openDatesPage();
     }
+
+    @AfterClass(alwaysRun = true)
+    public void closeBrowser() {
+        //7 Close browser
+        close();
+    }
+
 
     @Test(dataProvider = "information")
     public void sliderTest(int from, int to) {
