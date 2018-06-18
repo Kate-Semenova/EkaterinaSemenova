@@ -72,7 +72,6 @@ public class DifferentElementsPageTest extends ServiceSuiteBase {
         //8 Select elements: checkBoxes, radio, dropdown, checkBoxes
         differentElementPage.select(elements);
         //9 Assert there is an individual log row
-        // Thread.sleep(5000);
         differentElementPage.shouldHasCorrectLogRow(elements);
     }
 }
