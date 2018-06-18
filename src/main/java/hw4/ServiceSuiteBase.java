@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.close;
 /**
  * Created by Екатерина on 15.06.2018.
  */
-public class SuiteBase {
+public class ServiceSuiteBase {
     @BeforeSuite(alwaysRun = true)
     public void setUpConfigurations() {
         Configuration.browser = "chrome";
