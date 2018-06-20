@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import hw4.enums.CheckBox;
 import hw4.enums.DropDown;
 import hw4.enums.Radio;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -45,42 +46,33 @@ public class DifferentElements {
         buttons.shouldHaveSize(2);
     }
 
+    @Step
     public void shouldHasLeftSection() {
         leftSection.shouldBe(visible);
     }
 
+    @Step
     public void shouldHasRightSection() {
         rightSection.shouldBe(visible);
     }
 
-    public void selectCheckBox(CheckBox checkBoxName) {
-        checkBoxes.get(checkBoxName.index).click();
-    }
+    @Step
+    public void selectElement(Object[] elements) {
 
-    public void selectRadio(Radio radio) {
-        radios.get(radio.index).click();
-    }
-
-    public void selectDropDown(DropDown dropDownName) {
-        dropDown.click();
-        dropDownOptions.get(dropDownName.index).click();
-    }
-
-    public void select(Object[] elements) {
-        if (elements.length == 1) {
-            if (elements[0] instanceof DropDown) {
-                selectDropDown((DropDown) elements[0]);
-            }
-            if (elements[0] instanceof Radio) {
-                selectRadio((Radio) elements[0]);
-            }
-        } else {
+        if (elements[0] instanceof DropDown) {
+            selectDropDown((DropDown) elements[0]);
+        }
+        if (elements[0] instanceof Radio) {
+            selectRadio((Radio) elements[0]);
+        }
+        if (elements[0] instanceof CheckBox) {
             for (Object checkBoxName : elements) {
                 selectCheckBox((CheckBox) checkBoxName);
             }
         }
     }
 
+    @Step
     public void shouldHasCorrectLogRow(Object[] elements) {
         if (elements.length == 1) {
             if (elements[0] instanceof DropDown) {
@@ -97,10 +89,22 @@ public class DifferentElements {
             for (int i = 0; i < elements.length; i++) {
                 CheckBox newObject = (CheckBox) elements[elements.length - 1 - i];
                 logCollection.get(i).should(matchText("\\d\\d:\\d\\d:\\d\\d "
-                                + newObject.name + ": condition changed to "
-                        + checkBoxes.get(newObject.index).is(checked)
-                ));
+                        + newObject.name + ": condition changed to "
+                        + checkBoxes.get(newObject.index).is(checked)));
             }
         }
+    }
+
+    private void selectCheckBox(CheckBox checkBoxName) {
+        checkBoxes.get(checkBoxName.index).click();
+    }
+
+    private void selectRadio(Radio radio) {
+        radios.get(radio.index).click();
+    }
+
+    private void selectDropDown(DropDown dropDownName) {
+        dropDown.click();
+        dropDownOptions.get(dropDownName.index).click();
     }
 }
