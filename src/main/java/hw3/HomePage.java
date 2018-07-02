@@ -107,7 +107,7 @@ public class HomePage {
 
 
     public void checkTextsOnMainHeaderAreDisplayed() {
-        assertEquals(centerTexts.size(), 4);
+        assertEquals(centerTexts.size(), 3);
         for (WebElement text : centerTexts) {
             assertTrue(text.isDisplayed());
         }

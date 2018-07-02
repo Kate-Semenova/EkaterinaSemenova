@@ -9,7 +9,7 @@ import static java.lang.System.setProperty;
  * Created by Екатерина on 01.06.2018.
  */
 public class TestBase {
-    public static final String driverPath = "src\\main\\resources\\chromedriver.exe";
+    public static final String driverPath = "src\\main\\resources\\driver\\chromedriver.exe";
 
     @BeforeSuite(alwaysRun = true)
     public static void setUpSuit() {

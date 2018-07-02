@@ -22,7 +22,7 @@ public class HomePageLoginTest extends TestBase {
 
     @BeforeMethod
     public void setUpMethod() {
-        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", "target");
 
         options = new ChromeOptions();

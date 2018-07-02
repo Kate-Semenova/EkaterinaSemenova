@@ -20,7 +20,7 @@ public class SmokeAndRegressionTest {
 
     @Test(groups = "Smoke")
     public void simpleSeleniumTest() {
-        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\driver\\chromedriver.exe");
 
         HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", "target");

@@ -38,7 +38,7 @@ public class HomePageTextTest {
     //TODO Should check spelling
     @BeforeClass
     public void setUpConfigurations() {
-        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\driver\\chromedriver.exe");
         //TODO learn about options
         HashMap<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("download.default_directory", "target");
