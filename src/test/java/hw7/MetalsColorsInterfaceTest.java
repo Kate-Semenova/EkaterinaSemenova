@@ -29,6 +29,7 @@ public class MetalsColorsInterfaceTest extends MetalColorsInterfaceTestsInit {
         //Fill form Metals & Colors :
         initialiseData();
 
+        // TODO you should use Entity Driving Testing approach !!
         metalsColorsPage.summary.selectOdd(ODD);
         metalsColorsPage.summary.selectEven(EVEN);
 
@@ -45,8 +46,10 @@ public class MetalsColorsInterfaceTest extends MetalColorsInterfaceTestsInit {
 
         //Result section contains certain data
         metalsColorsPage.result.checkText(ODD, EVEN, ELEMENTS, COLOR, METAL, VEGETABLES);
+        // !TODO
     }
 
+    // TODO this is not related to tests, actually. This should not be here !
     private void initialiseData() {
         properties = new Properties();
         logger.info("Read properties from " + PROPERTY);

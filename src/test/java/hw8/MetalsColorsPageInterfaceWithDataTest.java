@@ -17,6 +17,7 @@ import static hw7and8.site.JDIExampleSite.*;
 /**
  * Created by Ekaterina on 27.06.2018.
  */
+// TODO pay attention, that last data set can be DELETED !
 public class MetalsColorsPageInterfaceWithDataTest extends MetalColorsInterfaceTestsInit {
 
     @Test(dataProvider = "getData")
@@ -27,6 +28,7 @@ public class MetalsColorsPageInterfaceWithDataTest extends MetalColorsInterfaceT
 
     @DataProvider
     public Object[][] getData() throws FileNotFoundException {
+        // TODO what is the reason of local variable here ?
         JSONReader jsonReader = JSONReader.getInstance();
         return jsonReader.getDataFromJSON();
     }
@@ -41,6 +43,8 @@ public class MetalsColorsPageInterfaceWithDataTest extends MetalColorsInterfaceT
         homePage.checkOpened();
 
         //Open Metals & Colors page by Header menu
+        // TODO you should create a method that can be used for opening any kind of page
+        // TODO take  a look on class work
         openMetalsAndColors();
         metalsColorsPage.checkOpened();
 
