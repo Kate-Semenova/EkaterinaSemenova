@@ -6,7 +6,6 @@ import hw4.enums.CheckBox;
 import hw4.enums.DropDown;
 import hw4.enums.Radio;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.*;
