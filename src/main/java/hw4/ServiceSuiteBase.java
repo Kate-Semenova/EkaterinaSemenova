@@ -1,7 +1,10 @@
 package hw4;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
 import org.testng.annotations.BeforeSuite;
+
+import static com.codeborne.selenide.WebDriverRunner.CHROME;
 
 
 /**
@@ -10,8 +13,7 @@ import org.testng.annotations.BeforeSuite;
 public class ServiceSuiteBase {
     @BeforeSuite(alwaysRun = true)
     public void setUpConfigurations() {
-        Configuration.browser = "chrome";
-        //Configuration.browserVersion = "2.9";
+        Configuration.browser = CHROME;
         Configuration.screenshots = false;
         Configuration.timeout = 10000;
         Configuration.pollingInterval = 200;

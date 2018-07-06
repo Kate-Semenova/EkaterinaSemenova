@@ -5,12 +5,15 @@ import hw4.pageobjects.HomePage;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import listeners.FailesTestAttachmentListener;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.page;
-import static hw4.enums.CheckBox.*;
-import static hw4.enums.DropDown.*;
+import static hw4.enums.CheckBox.WATER;
+import static hw4.enums.CheckBox.WIND;
+import static hw4.enums.DropDown.YELLOW;
 import static hw4.enums.Radio.SELEN;
 import static hw4.enums.User.PITER_CHAILOVSKII;
 
