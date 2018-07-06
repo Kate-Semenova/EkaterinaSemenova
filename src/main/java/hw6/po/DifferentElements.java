@@ -21,10 +21,6 @@ import static com.codeborne.selenide.Selenide.page;
  * Created by Екатерина on 18.06.2018.
  */
 public class DifferentElements {
-    public DifferentElements() {
-        page(this);
-    }
-
     @FindBy(css = ".label-checkbox > input")
     public ElementsCollection checkBoxes;
 
@@ -49,6 +45,14 @@ public class DifferentElements {
     @FindBy(css = ".logs > li")
     public ElementsCollection logCollection;
 
+    private List<CheckBox> selectedCheckBoxes = new ArrayList<>();
+    private SelenideElement selectedColor;
+    private SelenideElement radioButton;
+
+    public DifferentElements() {
+        page(this);
+    }
+
     @Step
     @Then("Interface on Different elements page contains all needed elements")
     public void shouldHasAllNeededElements() {
@@ -64,12 +68,12 @@ public class DifferentElements {
         leftSection.shouldBe(visible);
     }
 
+
     @Step
     @Then("Assert that there is Right Section")
     public void shouldHasRightSection() {
         rightSection.shouldBe(visible);
     }
-
 
     @Step
     @When("I select checkboxes (.+)")
@@ -90,6 +94,7 @@ public class DifferentElements {
 
     }
 
+
     @Step
     @When("I unselect and assert checkboxes (.+)")
     public void unselectCheckBox(String checkBoxNames) {
@@ -98,7 +103,7 @@ public class DifferentElements {
             list.add((CheckBox.valueOf(elementName.toUpperCase())));
             amountOfLogs++;
         }
-selectedCheckBoxes = new ArrayList<>();
+        selectedCheckBoxes = new ArrayList<>();
         for (CheckBox element : list
                 ) {
             if (checkBoxes.get(element.index).is(selected)) {
@@ -106,20 +111,14 @@ selectedCheckBoxes = new ArrayList<>();
                 selectedCheckBoxes.add(element);
             }
         }
-       // selectedCheckBoxes = list;
     }
-
 
     @Step
     @Then("Log row is displayed")
     public void checkLogRow() {
-
         logCollection.shouldHave(size(amountOfLogs));
-        //System.out.println("AMOUNT OF ROWS" + amount);
-
     }
 
-    private List<CheckBox> selectedCheckBoxes = new ArrayList<>();
 
     @Step
     @Then("Value is corresponded to the status of checkbox")
@@ -134,7 +133,6 @@ selectedCheckBoxes = new ArrayList<>();
         }
     }
 
-
     @Step
     @Then("CheckBoxes (.+) are selected")
     public void checkBoxesAreSelected(String checkBoxNames) {
@@ -146,6 +144,7 @@ selectedCheckBoxes = new ArrayList<>();
             checkBoxes.get(CheckBox.getCheckBox(elementName).index);
         }
     }
+
     @Step
     @Then("CheckBoxes (.+) are unselected")
     public void checkBoxesAreUnSelected(String checkBoxNames) {
@@ -158,7 +157,6 @@ selectedCheckBoxes = new ArrayList<>();
         }
     }
 
-    private SelenideElement radioButton;
 
     @Step
     @When("I select radio button (.+)")
@@ -184,8 +182,6 @@ selectedCheckBoxes = new ArrayList<>();
                 + radioButton.getText()));
     }
 
-    public SelenideElement selectedColor;
-
     @Step
     @When("I select in dropdown (.+)")
     public void selectDropDown(String color) {
@@ -199,7 +195,6 @@ selectedCheckBoxes = new ArrayList<>();
     @Then("Color is selected")
     public void dropDownIsSelected() {
         selectedColor.shouldBe(selected);
-    //    dropDown.shouldHave(text(selectedColor.getText()));
     }
 
     @Step

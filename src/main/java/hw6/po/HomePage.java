@@ -24,35 +24,48 @@ public class HomePage {
     @FindBy(css = ".sub")
     public SelenideElement serviceLeftDropDown;
 
+    @FindBy(css = "a[href='user-table.html']")
+    public SelenideElement userTablePageButton;
+
+    @FindBy(css = ".profile-photo")
+    public SelenideElement userIcon;
+    @FindBy(css = "#Name")
+    public SelenideElement loginInput;
+
+    @FindBy(css = "#Password")
+    public SelenideElement passwordInput;
+
+    @FindBy(css = ".form-horizontal button[type = 'submit']")
+    public SelenideElement submitButton;
+
+    @FindBy(css = ".dropdown-toggle")
+    public SelenideElement serviceHeader;
+
+    @FindBy(css = "a[href='different-elements.html']")
+    public SelenideElement differentElementsPageButton;
+
+    @FindBy(css = ".benefit-icon")
+    public ElementsCollection icons;
+
+    @FindBy(css = ".benefit-txt")
+    public ElementsCollection textsBellow;
+    @FindBy(css = ".main-content > [class*='main']")
+    public ElementsCollection textsAbove;
+
+    @FindBy(css = ".logout")
+    public SelenideElement logOut;
+
+    @FindBy(css = ".dropdown-menu")
+    public SelenideElement serviceHeaderDropDown;
+
+    @FindBy(css = ".fa-caret-down")
+    public SelenideElement serviceLeft;
+
+    private final String URL = HOME_PAGE.url;
+
     public HomePage() {
         page(this);
     }
-
-    private final String URL = HOME_PAGE.url;
-    @FindBy(css = ".profile-photo")
-    private SelenideElement userIcon;
-
-    @FindBy(css = "#Name")
-    private SelenideElement loginInput;
-
-    @FindBy(css = "#Password")
-    private SelenideElement passwordInput;
-
-    @FindBy(css = ".form-horizontal button[type = 'submit']")
-    private SelenideElement submitButton;
-
-    @FindBy(css = ".dropdown-toggle")
-    private SelenideElement serviceHeader;
-
-    @FindBy(css = "a[href='different-elements.html']")
-    SelenideElement differentElementsPageButton;
-
-    @FindBy(css = ".benefit-icon")
-    ElementsCollection icons;
-    @FindBy(css = ".benefit-txt")
-    ElementsCollection textsBellow;
-    @FindBy(css = ".main-content > [class*='main']")
-    ElementsCollection textsAbove;
 
     @Step
     @Given("I am on Home Page")
@@ -70,13 +83,13 @@ public class HomePage {
     @When("I perform login as user (.*)/(.*)")
     public void login(String login, String password) {
         userIcon.click();
+        if (isLoggedIn()) {
+            logOut.click();
+        }
         loginInput.sendKeys(login);
         passwordInput.sendKeys(password);
         submitButton.click();
     }
-
-    @FindBy(css = ".logout")
-    public SelenideElement logOut;
 
     @Step("Login")
     @Given("I am logged in as (.*)")
@@ -92,16 +105,12 @@ public class HomePage {
 
     }
 
-    private boolean isLoggedIn() {
-        return !loginInput.isDisplayed();
-    }
 
     @Step
     @Then("The user name is (.*)")
     public void checkUserName(String name) {
         userIcon.shouldHave(text(name));
     }
-
 
     @Step
     @Then("The interface on Home page, contains all needed elements") //4 - pictures, 4 texts under them, 2 text above
@@ -125,12 +134,6 @@ public class HomePage {
         serviceLeft.shouldBe(visible);
         serviceLeft.click();
     }
-
-    @FindBy(css = ".dropdown-menu")
-    public SelenideElement serviceHeaderDropDown;
-
-    @FindBy(css = ".fa-caret-down")
-    public SelenideElement serviceLeft;
 
     @Step
     @Then("(.+) drop down contains options")
@@ -156,20 +159,21 @@ public class HomePage {
         openPage(userTablePageButton);
     }
 
-    @FindBy(css = "a[href='user-table.html']")
-    public SelenideElement userTablePageButton;
-
-
     @Step("Open Different ElementsPage Page by href")
     @Given("I open Different Elements Page")
     public void openDifferentElementsPage() {
         openPage(differentElementsPageButton);
     }
 
+
     private void openPage(SelenideElement pageButton) {
         if (!pageButton.isDisplayed()) {
             serviceHeader.click();
         }
         pageButton.click();
+    }
+
+    private boolean isLoggedIn() {
+        return !loginInput.isDisplayed();
     }
 }

@@ -24,13 +24,21 @@ import static com.codeborne.selenide.WebDriverRunner.url;
  * Created by Ekaterina on 05.07.2018.
  */
 public class UserTable {
+    public static final String URL = Pages.USER_TABLE.url;
+
+    @FindBy(css = "tbody > tr")
+    public ElementsCollection tableLines;
+
+    @FindBy(css = ".logs > li")
+    public ElementsCollection logs;
+
+    private SelenideElement changedVIP;
+
+    private SelenideElement openedDropDown;
+
     public UserTable() {
         page(this);
     }
-
-    public static final String URL = Pages.USER_TABLE.url;
-    @FindBy(css = "tbody > tr")
-    public ElementsCollection tableLines;
 
     @Step
     @Given("I am on Users Table Page")
@@ -63,7 +71,7 @@ public class UserTable {
     @Step
     @When("I check Number and User columns of Users table")
     public void checkNumberUser() {
-        System.out.println("I check Number and User columns of Users table");
+        tableLines.shouldHave(CollectionCondition.size(7));
     }
 
     @Step
@@ -88,11 +96,9 @@ public class UserTable {
         }
     }
 
-    //
     @Step
     @When("I check Description column of Users table")
     public void checkDescription() {
-        //  System.out.println("I check Number and User columns of Users table");
         tableLines.get(0).$$("th").get(Table.Desciption.index).shouldBe(Condition.visible);
         for (int i = 1; i < tableLines.size(); i++) {
             tableLines.get(i).$$("td").get(Table.Desciption.index).shouldBe(Condition.visible);
@@ -100,22 +106,16 @@ public class UserTable {
         }
     }
 
-    private SelenideElement getVIPCheckBox(SelenideElement cell) {
-        return cell.$("[type='checkbox']");
-    }
-
     @Step
     @When("I set 'vip' status to (.*)")
     public void setVIP(String name) {
         for (int i = 1; i < tableLines.size(); i++) {
             if (tableLines.get(i).$$("td").get(Table.User.index).has(Condition.text(name))) {
-                changedVIP = getVIPCheckBox(tableLines.get(i));
+                changedVIP = tableLines.get(i).$("[type='checkbox']");
                 changedVIP.click();
             }
         }
     }
-
-    private SelenideElement changedVIP;
 
     @Step
     @Then("'Log' section shows a log row in format: FIELDNAME: condition changed to STATUS")
@@ -123,9 +123,6 @@ public class UserTable {
         String regex = "Vip: condition changed to " + changedVIP.is(Condition.checked);
         logs.get(0).should(Condition.matchText(regex));
     }
-
-    @FindBy(css = ".logs > li")
-    public ElementsCollection logs;
 
     @Step
     @When("I click on dropdown in column Type for user (.*)")
@@ -149,5 +146,4 @@ public class UserTable {
         openedDropDown.$$("option").shouldHave(CollectionCondition.texts(options));
     }
 
-    private SelenideElement openedDropDown;
 }
