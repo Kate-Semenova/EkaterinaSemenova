@@ -14,13 +14,14 @@
         <suiteXmlFile>allureConfig.xml</suiteXmlFile>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <driver>chrome</driver>
     </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.epam.jdi/jdi-uitest-core -->
         <dependency>
             <groupId>com.epam.jdi</groupId>
-            <artifactId>jdi-uitest-core</artifactId>
+            <artifactId>jdi-uitest-web</artifactId>
             <version>1.1.18</version>
         </dependency>
 

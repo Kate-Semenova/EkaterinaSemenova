@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="WINDOWS-1251"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Test suite" parallel="methods" verbose="3" thread-count="3">
-    <test name="Tests" preserve-order="true">
-        <classes>
-            <class name="hw8r.MetalsColorsPageInterfaceWithDataTest"/>
-        </classes>
-    </test>
-</suite>
