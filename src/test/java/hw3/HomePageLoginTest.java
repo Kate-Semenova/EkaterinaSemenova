@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -31,7 +32,11 @@ public class HomePageLoginTest extends TestBase {
         driver.manage().window().maximize();
     }
 
-    //1 Create a new test
+    @AfterMethod
+    public void close() {
+        driver.close();
+    }
+
     @Parameters({"login", "password", "name"})
     @Test
     public void shouldPerformLoggingInCorrectly(String login, String password, String name) {
@@ -77,8 +82,6 @@ public class HomePageLoginTest extends TestBase {
 
         //14 Assert that there is Footer.
         homePage.checkFooterIsDisplayed();
-        //15 Close Browser
-        homePage.close(driver);
     }
 
 }
