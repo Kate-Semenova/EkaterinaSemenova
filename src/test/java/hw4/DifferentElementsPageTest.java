@@ -5,7 +5,8 @@ import hw4.pageobjects.HomePage;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import listeners.FailesTestAttachmentListener;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -25,21 +26,22 @@ import static hw4.enums.User.PITER_CHAILOVSKII;
 @Listeners({FailesTestAttachmentListener.class})
 public class DifferentElementsPageTest extends ServiceSuiteBase {
     private HomePage homePage;
+    private DifferentElements differentElementPage;
 
-    @DataProvider
-    public Object[][] information() {
-
-        return new Object[][]{
-                {WATER, WIND},
-                {SELEN},
-                {YELLOW},
-                {WATER, WIND}
-        };
+    @BeforeClass(alwaysRun = true)
+    public void beforeClass() {
+        homePage = page(HomePage.class);
+        differentElementPage = page(DifferentElements.class);
     }
 
-    @Test(dataProvider = "information")
-    public void elementsTest(Object[] elements) throws InterruptedException {
-        homePage = page(HomePage.class);
+    @AfterClass(alwaysRun = true)
+    public void afterClass() {
+        close();
+        //OPERATIONS WITH BROWSERS ARE IN ANNOTATIONS
+    }
+
+    @Test
+    public void elementsTest() {
         //1 Open test site by URL
         homePage.openHomePage();
 
@@ -53,8 +55,6 @@ public class DifferentElementsPageTest extends ServiceSuiteBase {
         homePage.openService();
         homePage.openDifferentElementsPage();
 
-        DifferentElements differentElementPage = page(DifferentElements.class);
-
         //5 Check interface on Different elements page, it contains all needed elements
         differentElementPage.shouldHasAllNeededElements();
 
@@ -64,13 +64,25 @@ public class DifferentElementsPageTest extends ServiceSuiteBase {
         //7 Assert that there is Left Section
         differentElementPage.shouldHasLeftSection();
 
-        //8 Select elements: checkBoxes, radio, dropdown, checkBoxes
-        differentElementPage.selectElement(elements);
 
+        //8. Select checkboxes
+        differentElementPage.selectCheckBoxes(WATER, WIND);
         //9 Assert there is an individual log row
-        differentElementPage.shouldHasCorrectLogRow(elements);
+        differentElementPage.shouldHasCorrectLogRowForCheckBoxes(WATER, WIND);
 
-        //10 Close browser
-        close();
+        //10 Select radio
+        differentElementPage.selectRadio(SELEN);
+        //11 Assert there is an individual log row
+        differentElementPage.shouldHasCorrectLogRowForRadio(SELEN);
+
+        //12 Select dropdown
+        differentElementPage.selectDropDown(YELLOW);
+        //13 Assert there is an individual log row
+        differentElementPage.shouldHasCorrectLogRowForDropDown(YELLOW);
+
+        //14 Select checkBoxes
+        differentElementPage.selectCheckBoxes(WATER, WIND);
+        //15 Assert there is an individual log row
+        differentElementPage.shouldHasCorrectLogRowForCheckBoxes(WATER, WIND);
     }
 }

@@ -47,6 +47,12 @@ public class UserTable {
     }
 
     @Step
+    @Given("User Table Page's interface contains correct elements")
+    public void checkElements(){
+        tableLines.shouldHave(CollectionCondition.size(7));
+    }
+
+    @Step
     @Then("User table contain correct values for numbers and users")
     public void checkValues(DataTable dataTable) {
         List<List<String>> data = dataTable.asLists();

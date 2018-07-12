@@ -13,7 +13,8 @@ import static com.codeborne.selenide.WebDriverRunner.CHROME;
 public class ServiceSuiteBase {
     @BeforeSuite(alwaysRun = true)
     public void setUpConfigurations() {
-        Configuration.browser = CHROME;
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Екатерина\\Documents\\Everything about JAVA\\epam\\EkaterinaSemenova\\src\\main\\resources\\driver\\chromedriver.exe");
+        System.setProperty("selenide.browser", "Chrome");
         Configuration.screenshots = false;
         Configuration.timeout = 10000;
         Configuration.pollingInterval = 200;

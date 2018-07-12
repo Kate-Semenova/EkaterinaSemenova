@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.actions;
 
@@ -16,8 +18,8 @@ public class Dates {
     private ElementsCollection handles;
     @FindBy(css = ".uui-slider")
     private SelenideElement slider;
-    @FindBy(css = ".logs > li")
-    private ElementsCollection logCollection;
+    @FindBy(css = ".logs li")
+    private List<SelenideElement> logCollection;
 
     @Step
     public void setHandles(int from, int to) {
@@ -27,13 +29,6 @@ public class Dates {
 
     @Step
     public void checkLogsValues(int from, int to) {
-        //webdriverwait
-
-        System.out.println(logCollection.size());
-        for (SelenideElement log: logCollection
-             ) {
-            System.out.println(log.getText());
-        }
         logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + to + ".*"));
         logCollection.get(1).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + from + ".*"));
     }

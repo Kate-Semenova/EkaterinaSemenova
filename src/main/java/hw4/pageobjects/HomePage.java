@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static hw4.enums.Pages.HOME_PAGE;
 
 /**
- *
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
@@ -36,12 +35,15 @@ public class HomePage {
     @FindBy(css = "a[href='different-elements.html']")
     SelenideElement differentElementsPageButton;
 
-    @Step ("Open Home Page")
+    @FindBy(css = ".logout")
+    public SelenideElement logOut;
+
+    @Step("Open Home Page")
     public void openHomePage() {
         Selenide.open(URL);
     }
 
-    @Step ("Check the title")
+    @Step("Check the title")
     public void checkTitle() {
         Assert.assertEquals(Selenide.title(), HOME_PAGE.title);
     }
@@ -52,6 +54,10 @@ public class HomePage {
         loginInput.sendKeys(login);
         passwordInput.sendKeys(password);
         submitButton.click();
+    }
+
+    private boolean isLoggedIn() {
+        return !loginInput.isDisplayed();
     }
 
     @Step("Open dropdown Service")
@@ -70,7 +76,7 @@ public class HomePage {
         openPage(differentElementsPageButton);
     }
 
-    private void openPage(SelenideElement pageButton){
+    private void openPage(SelenideElement pageButton) {
         pageButton.shouldBe(visible);
         pageButton.click();
     }

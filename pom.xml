@@ -9,12 +9,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>2.6.0</allure.version>
         <aspectj.version>1.8.12</aspectj.version>
-        <suiteXmlFile>allureConfig.xml</suiteXmlFile>
+        <driver>chrome</driver>
+
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <driver>chrome</driver>
     </properties>
 
     <dependencies>
@@ -40,7 +41,7 @@
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>4.11.4</version>
+            <version>4.12.2</version>
         </dependency>
 
         <!-- Lombok-->
@@ -96,16 +97,28 @@
             <version>${aspectj.version}</version>
         </dependency>
 
+        <!--<dependency>-->
+        <!--<groupId>org.aspectj</groupId>-->
+        <!--<artifactId>aspectjrt</artifactId>-->
+        <!--<version>${aspectj.version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.aspectj</groupId>-->
+        <!--<artifactId>aspectjtools</artifactId>-->
+        <!--<version>${aspectj.version}</version>-->
+        <!--</dependency>-->
+
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectj.version}</version>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjtools</artifactId>
-            <version>${aspectj.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.0.pr2</version>
         </dependency>
 
         <dependency>
@@ -119,10 +132,31 @@
             <artifactId>cucumber-testng</artifactId>
             <version>3.0.2</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.13.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <!-- Java version 8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -159,6 +193,7 @@
         </plugins>
     </build>
 
+    <!-- Allure reporting -->
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
@@ -169,5 +204,45 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+
+        <profile>
+            <id>hw7</id>
+            <properties>
+                <suiteXmlFile>hw7\hw7Config.xml</suiteXmlFile>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>hw8</id>
+            <properties>
+                <suiteXmlFile>hw8\hw8Config.xml</suiteXmlFile>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>hw6</id>
+            <properties>
+                <suiteXmlFile>hw6\cucumberConfig.xml</suiteXmlFile>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>hw4</id>
+            <properties>
+                <suiteXmlFile>hw4\serviceInterfaceConfig1.xml</suiteXmlFile>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
 </project>

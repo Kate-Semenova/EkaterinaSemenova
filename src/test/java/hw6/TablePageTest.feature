@@ -5,7 +5,7 @@ And I am logged in as Piter Chailovskii
 And I open User Table Page through the header menu Service -> User Table
 And I am on Users Table Page
 #And User Table Page is Active
-#And User Table Page's interface contains correct elements
+And User Table Page's interface contains correct elements
 
 When I check Number and User columns of Users table
 Then User table contain correct values for numbers and users

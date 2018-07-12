@@ -15,5 +15,8 @@ public class CucumberTestngRunner extends AbstractTestNGCucumberTests {
     @BeforeSuite
     public void beforeSuite() {
         Configuration.browser = "chrome";
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Екатерина\\Documents\\Everything about JAVA\\epam\\EkaterinaSemenova\\src\\main\\resources\\driver\\chromedriver.exe");
+        Configuration.browser = "chrome";
+        Configuration.browserVersion = "2.8"; //2.8/chromedriver_win32.zip
     }
 }

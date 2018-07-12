@@ -5,9 +5,8 @@ import hw4.pageobjects.HomePage;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import listeners.FailesTestAttachmentListener;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.junit.After;
+import org.testng.annotations.*;
 
 import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.page;
@@ -32,11 +31,19 @@ public class DatesPageTest extends ServiceSuiteBase {
                 {30, 70}
         };
     }
-
-
-    @Test(dataProvider = "information")
-    public void sliderTest(int from, int to) {
+    @BeforeClass(alwaysRun = true)
+    public void beforeClass() {
         homePage = page(HomePage.class);
+        datesPage = page(Dates.class);
+
+    }
+    @AfterClass(alwaysRun = true)
+    public void afterClass() {
+        close();
+    }
+
+    @Test()
+    public void sliderTest() {
         //1 Open test site by URL
         homePage.openHomePage();
 
@@ -50,13 +57,25 @@ public class DatesPageTest extends ServiceSuiteBase {
         homePage.openService();
         homePage.openDatesPage();
 
-        datesPage = page(Dates.class);
         //5 Range sliders
-        datesPage.setHandles(from, to);
-
+        datesPage.setHandles(0, 100);
         //6 Assert that for "From" and "To" sliders there are logs rows with corresponding values
-        datesPage.checkLogsValues(from, to);
-        //7 Close browser
-        close();
+        datesPage.checkLogsValues(0, 100);
+
+        //7 Range sliders
+        datesPage.setHandles(0, 0);
+        //8 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPage.checkLogsValues(0, 0);
+
+        //9 Range sliders
+        datesPage.setHandles(100, 100);
+        //10 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPage.checkLogsValues(100, 100);
+
+        //11 Range sliders
+        datesPage.setHandles(30, 70);
+        //12 Assert that for "From" and "To" sliders there are logs rows with corresponding values
+        datesPage.checkLogsValues(30, 70);
+
     }
 }
