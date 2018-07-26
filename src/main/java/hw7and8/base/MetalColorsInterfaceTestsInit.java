@@ -12,6 +12,8 @@ import java.util.Properties;
 
 import static com.epam.jdi.uitests.core.settings.JDISettings.logger;
 
+// TODO This is not an interface obviously
+// TODO you should not store data here
 public class MetalColorsInterfaceTestsInit extends TestNGBase {
 
     public final static String PROPERTY = "parametersForHW7.properties";

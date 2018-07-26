@@ -6,6 +6,7 @@ import lombok.Getter;
  * Created by Ekaterina on 25.06.2018.
  */
 @Getter
+// TODO Code convention !
 public enum HeaderMenu {
     Home("Home"),
     Contact_form("Contact form"),
