@@ -15,6 +15,7 @@ import static org.testng.Assert.assertTrue;
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
+    // TODO what bout enums ?
     private final String title = "Home Page";
     @FindBy(css = ".profile-photo")
     private WebElement userIcon;
@@ -70,6 +71,8 @@ public class HomePage {
     }
 
     public void checkNavigationBar() {
+        // TODO you have to create something for store the list of page's name
+        // TODO it will be better with cycle...
         assertEquals(navigateBarElements.size(), 4);
         assertEquals(navigateBarElements.get(0).getText(), "HOME");
         assertEquals(navigateBarElements.get(1).getText(), "CONTACT FORM");
@@ -89,6 +92,8 @@ public class HomePage {
         for (WebElement text : texts) {
             assertTrue(text.isDisplayed());
         }
+
+        // TODO same, 75 str
         assertEquals(texts.get(0).getText(), "To include good practices\n" +
                 "and ideas from successful\n" +
                 "EPAM project");
@@ -114,6 +119,7 @@ public class HomePage {
     }
 
     public void checkTextsOnMainHeader() {
+        // TODO same, 75 str
         assertEquals(centerTexts.get(0).getText(), "EPAM FRAMEWORK WISHES…");
         assertEquals(centerTexts.get(1).getText(),
                 "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, " +
@@ -126,10 +132,13 @@ public class HomePage {
     }
 
     public void checkJDILink() {
+        // TODO you should not get elements by indexes, that's really bad approach
+        // TODO @FindBy required...
         assertEquals(centerTexts.get(2).findElement(By.cssSelector("a"))
                 .getAttribute("href"), "https://github.com/epam/JDI");
     }
 
+    // TODO this method is newer used, take a look on IDEA warning...
     public void close(WebDriver driver) {
         driver.close();
     }
