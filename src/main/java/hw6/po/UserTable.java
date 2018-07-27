@@ -54,7 +54,10 @@ public class UserTable {
 
     @Step
     @Then("User table contain correct values for numbers and users")
+    // TODO this will be better with List<MyClass> varName
     public void checkValues(DataTable dataTable) {
+        // TODO you have to create method, that allow us to get the whole Users from table
+        // TODO and compare them with expected lists of the Users...
         List<List<String>> data = dataTable.asLists();
         int i = 0;
         for (List<String> line : data) {
@@ -82,6 +85,7 @@ public class UserTable {
 
     @Step
     @Then("All cells of 'Description' column contains text")
+    // TODO same
     public void checkDescription(DataTable dataTable) {
         List<List<String>> data = dataTable.asLists();
         int i = 0;
