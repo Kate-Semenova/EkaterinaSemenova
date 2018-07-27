@@ -13,7 +13,8 @@ import static com.codeborne.selenide.WebDriverRunner.CHROME;
 public class ServiceSuiteBase {
     @BeforeSuite(alwaysRun = true)
     public void setUpConfigurations() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Екатерина\\Documents\\Everything about JAVA\\epam\\EkaterinaSemenova\\src\\main\\resources\\driver\\chromedriver.exe");
+        // TODO this wont work for me, actually. Anyway, this should be configured via pom.xml
+        System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
         System.setProperty("selenide.browser", "Chrome");
         Configuration.screenshots = false;
         Configuration.timeout = 10000;

@@ -22,6 +22,8 @@ public class DatesPageTest extends ServiceSuiteBase {
     private Dates datesPage;
     private HomePage homePage;
 
+    // TODO what is this ???? could you please show me the place where this "information" used...
+    // TODO this name is not so good, actually...
     @DataProvider
     public Object[][] information() {
         return new Object[][]{
@@ -31,12 +33,14 @@ public class DatesPageTest extends ServiceSuiteBase {
                 {30, 70}
         };
     }
+
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         homePage = page(HomePage.class);
         datesPage = page(Dates.class);
 
     }
+
     @AfterClass(alwaysRun = true)
     public void afterClass() {
         close();

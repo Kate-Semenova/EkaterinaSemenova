@@ -49,9 +49,12 @@ public class DifferentElementsPageTest extends ServiceSuiteBase {
         homePage.checkTitle();
 
         //3 Perform login
+        // TODO why don't you pass just a PITER_CHAILOVSKII to this method ??
         homePage.login(PITER_CHAILOVSKII.login, PITER_CHAILOVSKII.password);
 
         //4 Open through the header menu Service -> Different Elements Page
+        // TODO this will be better with parameter.
+        // TODO you have to create one single method that allow us to opne any kind of pages...
         homePage.openService();
         homePage.openDifferentElementsPage();
 

@@ -29,6 +29,7 @@ public class Dates {
 
     @Step
     public void checkLogsValues(int from, int to) {
+        // TODO oh my
         logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + to + ".*"));
         logCollection.get(1).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + from + ".*"));
     }

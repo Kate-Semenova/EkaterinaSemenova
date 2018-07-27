@@ -1,17 +1,12 @@
 package hw4.pageobjects;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
-import cucumber.api.java.eo.Se;
 import hw4.enums.CheckBox;
 import hw4.enums.DropDown;
 import hw4.enums.Radio;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -62,6 +57,7 @@ public class DifferentElements {
         rightSection.shouldBe(visible);
     }
 
+    // TODO tae a look on IDEA warning...
     @Step
     public void selectElement(Object... elements) {
 
@@ -93,13 +89,15 @@ public class DifferentElements {
 
     @Step
     public void shouldHasCorrectLogRowForRadio(Radio radio) {
-
+        // TODO indexes. Is that really necessary do include lots of \\d here ???
+        // TODO try to find another way, please...
         logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d metal: value changed to "
                 + radio.name));
     }
+
     @Step
     public void shouldHasCorrectLogRowForDropDown(DropDown dropDown) {
-
+        // TODO same
         logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d Colors: value changed to "
                 + dropDown.name));
     }
