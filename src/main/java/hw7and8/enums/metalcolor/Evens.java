@@ -1,4 +1,4 @@
-package hw7and8.enums;
+package hw7and8.enums.metalcolor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public enum Evens {
         }
     }
 
-    public String value;
+    public final String value;
 
     Evens(String value) {
         this.value = value;
@@ -26,7 +26,4 @@ public enum Evens {
         return EVENS_MAP.get(Integer.toString(value));
     }
 
-    public static boolean hasEven(String value) {
-        return EVENS_MAP.containsKey(value);
-    }
 }

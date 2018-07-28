@@ -1,4 +1,4 @@
-package hw7and8.enums;
+package hw7and8.enums.metalcolor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public enum Odds {
         }
     }
 
-    public String value;
+    public final String value;
 
     Odds(String value) {
         this.value = value;

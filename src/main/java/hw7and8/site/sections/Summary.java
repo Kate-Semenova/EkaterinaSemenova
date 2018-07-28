@@ -2,8 +2,8 @@ package hw7and8.site.sections;
 
 import com.epam.jdi.uitests.web.selenium.elements.complex.RadioButtons;
 import com.epam.jdi.uitests.web.selenium.elements.composite.Section;
-import hw7and8.enums.Evens;
-import hw7and8.enums.Odds;
+import hw7and8.enums.metalcolor.Evens;
+import hw7and8.enums.metalcolor.Odds;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -16,16 +16,11 @@ public class Summary extends Section {
     @FindBy(css = "#even-selector p")
     public RadioButtons<Evens> evens;
 
-    public void selectOdd(int number) {
 
-        if (number != 0) {
-            odds.select(Odds.getByValue(number));
-        }
-    }
-
-    public void selectEven(int number) {
-        if (number != 0) {
-            evens.select(Evens.getByValue(number));
+    public void select(int... integers) {
+        if (integers.length == 2) {
+            odds.select(Odds.getByValue(integers[0]));
+            evens.select(Evens.getByValue(integers[1]));
         }
     }
 

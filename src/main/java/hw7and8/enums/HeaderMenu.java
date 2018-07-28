@@ -8,12 +8,12 @@ import lombok.Getter;
 @Getter
 // TODO Code convention !
 public enum HeaderMenu {
-    Home("Home"),
-    Contact_form("Contact form"),
-    Service("Service"),
-    Metals_n_Colors("Metals & Colors");
+    HOME("Home"),
+    CONTACT_FORM("Contact form"),
+    SERVICE("Service"),
+    METALS_N_COLORS("Metals & Colors");
 
-    private String value;
+    private final String value;
 
     HeaderMenu(String value) {
         this.value = value;
