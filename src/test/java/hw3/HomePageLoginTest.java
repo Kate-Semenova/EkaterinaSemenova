@@ -17,9 +17,12 @@ import java.util.HashMap;
  */
 public class HomePageLoginTest extends TestBase {
     private HomePage homePage;
+
+    // TODO dou you have a chance to read IDEA warning ?
     private ChromeOptions options;
     private WebDriver driver;
 
+    // TODO you should not ini WebDriver here...
     @BeforeMethod
     public void setUpMethod() {
         HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -37,11 +40,13 @@ public class HomePageLoginTest extends TestBase {
         driver.close();
     }
 
-    @Parameters({"login", "password", "name"})
     @Test
+    // TODO thats not really gooad approach to pass vars by xml parameters, but OKAY...
+    @Parameters({"login", "password", "name"})
     public void shouldPerformLoggingInCorrectly(String login, String password, String name) {
 
-
+        // TODO this is completely prohibited to pass driver in PO method !!
+        // TODO you can just create appropriate constructor and store link of the driver there.
         //2 Open test site by URL
         homePage.open(driver);
 
@@ -60,13 +65,11 @@ public class HomePageLoginTest extends TestBase {
         //7 Assert that there are 4 items on the header section are displayed and they have proper texts
         homePage.checkNavigationBar();
 
-
         //8 Assert that there are 4 images on the Index Page and they are displayed
         homePage.checkImagesOnIndexPage();
 
         //9 Assert that there are 4 texts on the Index Page under icons and they have proper text
         homePage.checkTexts();
-
 
         //10 Assert a text of the main header
         homePage.checkTextsOnMainHeaderAreDisplayed();

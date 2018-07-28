@@ -3,6 +3,7 @@ package hw6.enums;
 /**
  * Created by Ekaterina on 05.07.2018.
  */
+// TODO Code convention ?
 public enum Table {
 
     Number(0), Type(1), User(2), Desciption(3);

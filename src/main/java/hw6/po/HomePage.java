@@ -145,11 +145,12 @@ public class HomePage {
         if (position.equals("Left")) {
             dropDown = serviceLeftDropDown;
         }
+        // TODO NPE ?
         dropDown.shouldBe(visible);
-        for (SelenideElement element : dropDown.$$("li")
-                ) {
+        for (SelenideElement element : dropDown.$$("li")) {
             element.shouldBe(visible);
         }
+        // TODO ENUM ?
         dropDown.$$("li").shouldHave(texts("SUPPORT", "DATES", "COMPLEX TABLE", "SIMPLE TABLE", "USER TABLE", "TABLE WITH PAGES", "DIFFERENT ELEMENTS", "PERFORMANCE"));
     }
 
