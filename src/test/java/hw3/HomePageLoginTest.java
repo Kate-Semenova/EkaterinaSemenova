@@ -18,6 +18,7 @@ import java.util.HashMap;
 public class HomePageLoginTest extends TestBase {
     private HomePage homePage;
 
+    // TODO x2
     // TODO dou you have a chance to read IDEA warning ?
     private ChromeOptions options;
     private WebDriver driver;

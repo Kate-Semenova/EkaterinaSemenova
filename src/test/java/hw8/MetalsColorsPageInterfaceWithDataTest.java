@@ -15,14 +15,12 @@ import static hw7and8.site.JDISite.metalsColorsPage;
 /**
  * Created by Ekaterina on 27.06.2018.
  */
-// TODO pay attention, that last data set can be DELETED !
+
 public class MetalsColorsPageInterfaceWithDataTest extends MetalColorsInterfaceTestsInit {
 
-
     @DataProvider
+    // TODO FNFE really ??
     public Object[][] getData() throws FileNotFoundException {
-        // TODO what is the reason of local variable here ?
-        // no reason
         return MetalColor.DEFAULT_FROM_JSON;
     }
 

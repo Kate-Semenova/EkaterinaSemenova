@@ -33,6 +33,7 @@ public class Result extends Section {
 
 
     @Step
+    // TODO it will be better with loop
     public void checkTextInLog(MetalColor data) {
         String elements = Arrays.toString(data.getElements());
         String vegetables = Arrays.toString(data.getVegetables());

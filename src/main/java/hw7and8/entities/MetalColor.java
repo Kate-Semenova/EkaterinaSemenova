@@ -25,8 +25,10 @@ public class MetalColor {
     private String[] vegetables;
 
     public final static MetalColor DEFAULT = new MetalColor("parametersForHW7.properties");
+    // TODO No! Why don't you create especial file for store&loading data ? This should not be here...
     public final static MetalColor[][] DEFAULT_FROM_JSON = JSONReader.getInstance().getDataFromJSON();
 
+    // TODO what is this method doing here ? Oh my...
     public MetalColor(String file) {
         Properties properties = new Properties();
         logger.info("Read property " + file);
