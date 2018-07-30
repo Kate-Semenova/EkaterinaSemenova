@@ -17,14 +17,16 @@ public enum User {
         this.login = login;
         this.password = password;
     }
-    private static final Map<String,User> USERS_NAME_MAP = new HashMap<>();
+
+    private static final Map<String, User> USERS_NAME_MAP = new HashMap<>();
 
     static {
         for (User user : values()) {
             USERS_NAME_MAP.put(user.name, user);
         }
     }
-    public static User getUserByName(String name){
+
+    public static User getUserByName(String name) {
         return USERS_NAME_MAP.get(name.toUpperCase());
     }
 }

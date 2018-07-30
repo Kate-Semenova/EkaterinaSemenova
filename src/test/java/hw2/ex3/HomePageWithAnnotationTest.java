@@ -46,7 +46,7 @@ public class HomePageWithAnnotationTest extends TestBase {
     //1 Create a new test
     @Test
     public void shouldPerformLoggingInCorrectly() {
-        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("download.default_directory", "target");
 
@@ -67,7 +67,7 @@ public class HomePageWithAnnotationTest extends TestBase {
         driver.findElement(By.cssSelector("#Password")).sendKeys("1234");
         driver.findElement(By.cssSelector(".form-horizontal button[type = 'submit']")).click();
 
-        //5 Assert User name in the left-top side of screen that user is logged in
+        //5 Assert USER name in the left-top side of screen that user is logged in
         WebElement userName = driver.findElement(By.cssSelector(".profile-photo span"));
         assertEquals(userName.getText(), "PITER CHAILOVSKII");
 

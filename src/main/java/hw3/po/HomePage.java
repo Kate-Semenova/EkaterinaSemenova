@@ -1,13 +1,17 @@
-package hw3;
+package hw3.po;
 
-import org.openqa.selenium.By;
+import hw3.enums.BenefitTexts;
+import hw3.enums.CentralTexts;
+import hw7and8.enums.HeaderMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.List;
 
+import static hw3.enums.Pages.HOME_PAGE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -15,11 +19,11 @@ import static org.testng.Assert.assertTrue;
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
+    private WebDriver driver;
     // TODO what bout enums ?
-    private final String title = "Home Page";
+    private final String title = HOME_PAGE.title;
     @FindBy(css = ".profile-photo")
     private WebElement userIcon;
-
     @FindBy(css = "#Name")
     private WebElement loginInput;
 
@@ -47,7 +51,15 @@ public class HomePage {
     @FindBy(css = ".text-center")
     private List<WebElement> centerTexts;
 
-    public void open(WebDriver driver) {
+    @FindBy(xpath = "//*[@class = 'main-content']//a[text() = 'JDI Github']")
+    private WebElement jdiGithub;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void open() {
         driver.navigate().to("https://epam.github.io/JDI/index.html");
     }
 
@@ -62,7 +74,7 @@ public class HomePage {
         assertEquals(userIcon.getText(), text);
     }
 
-    public void checkHomePageTitle(WebDriver driver) {
+    public void checkHomePageTitle() {
         assertEquals(driver.getTitle(), title);
     }
 
@@ -73,11 +85,11 @@ public class HomePage {
     public void checkNavigationBar() {
         // TODO you have to create something for store the list of page's name
         // TODO it will be better with cycle...
+        //DONE
         assertEquals(navigateBarElements.size(), 4);
-        assertEquals(navigateBarElements.get(0).getText(), "HOME");
-        assertEquals(navigateBarElements.get(1).getText(), "CONTACT FORM");
-        assertEquals(navigateBarElements.get(2).getText(), "SERVICE");
-        assertEquals(navigateBarElements.get(3).getText(), "METALS & COLORS");
+        for (int i = 0; i < navigateBarElements.size(); i++) {
+            assertEquals(navigateBarElements.get(i).getText(), HeaderMenu.values()[i].title);
+        }
     }
 
     public void checkImagesOnIndexPage() {
@@ -92,18 +104,11 @@ public class HomePage {
         for (WebElement text : texts) {
             assertTrue(text.isDisplayed());
         }
-
+        for (int i = 0; i < texts.size(); i++) {
+            assertEquals(texts.get(i).getText(), BenefitTexts.values()[i].text);
+        }
         // TODO same, 75 str
-        assertEquals(texts.get(0).getText(), "To include good practices\n" +
-                "and ideas from successful\n" +
-                "EPAM project");
-        assertEquals(texts.get(1).getText(), "To be flexible and\n" +
-                "customizable");
-        assertEquals(texts.get(2).getText(), "To be multiplatform");
-        assertEquals(texts.get(3).getText(), "Already have good base\n" +
-                "(about 20 internal and\n" +
-                "some external projects),\n" +
-                "wish to get more…");
+        //DONE
     }
 
     public void checkSideBar() {
@@ -120,26 +125,17 @@ public class HomePage {
 
     public void checkTextsOnMainHeader() {
         // TODO same, 75 str
-        assertEquals(centerTexts.get(0).getText(), "EPAM FRAMEWORK WISHES…");
-        assertEquals(centerTexts.get(1).getText(),
-                "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, " +
-                        "SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. " +
-                        "UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS " +
-                        "NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN " +
-                        "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR."
-        );
-        assertEquals(centerTexts.get(2).getText(), "JDI GITHUB");
+        //DONe
+        for (int i = 0; i < centerTexts.size(); i++) {
+            assertEquals(centerTexts.get(i).getText(), CentralTexts.values()[i].text);
+        }
     }
 
     public void checkJDILink() {
         // TODO you should not get elements by indexes, that's really bad approach
         // TODO @FindBy required...
-        assertEquals(centerTexts.get(2).findElement(By.cssSelector("a"))
-                .getAttribute("href"), "https://github.com/epam/JDI");
+        //DONE
+        assertEquals(jdiGithub.getAttribute("href"), "https://github.com/epam/JDI");
     }
 
-    // TODO this method is newer used, take a look on IDEA warning...
-    public void close(WebDriver driver) {
-        driver.close();
-    }
 }

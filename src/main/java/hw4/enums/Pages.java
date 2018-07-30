@@ -5,10 +5,11 @@ package hw4.enums;
  */
 public enum Pages {
     HOME_PAGE("Home Page", "https://epam.github.io/JDI/index.html"),
-    DATES_PAGE("Dates","https://epam.github.io/JDI/dates.html"),
+    DATES_PAGE("DATES", "https://epam.github.io/JDI/dates.html"),
     DIFFERENT_ELEMENT_PAGE("Different Element", "https://epam.github.io/JDI/different-elements.html");
     public String title;
     public String url;
+
     Pages(String title, String url) {
         this.title = title;
         this.url = url;

@@ -7,14 +7,15 @@ import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import hw6.enums.Pages;
+import hw6.enums.HeaderMenu;
+import hw6.table.TableData;
+import hw6.table.TableLine;
+import hw6.enums.HeaderMenu;
 import hw6.enums.Table;
-import io.cucumber.datatable.DataTable;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.page;
@@ -24,8 +25,6 @@ import static com.codeborne.selenide.WebDriverRunner.url;
  * Created by Ekaterina on 05.07.2018.
  */
 public class UserTable {
-    public static final String URL = Pages.USER_TABLE.url;
-
     @FindBy(css = "tbody > tr")
     public ElementsCollection tableLines;
 
@@ -36,44 +35,37 @@ public class UserTable {
 
     private SelenideElement openedDropDown;
 
+    private ElementsCollection dropDownOptions;
+
     public UserTable() {
         page(this);
     }
 
     @Step
-    @Given("I am on Users Table Page")
+    @Given("I am on User Table Page")
     public void check() {
-        Assert.assertEquals(url(), URL);
+        Assert.assertEquals(url(), "https://epam.github.io/JDI/" + HeaderMenu.USER_TABLE.URL);
     }
 
     @Step
     @Given("User Table Page's interface contains correct elements")
-    public void checkElements(){
+    public void checkElements() {
         tableLines.shouldHave(CollectionCondition.size(7));
+    }
+
+    public TableData table() {
+        return TableData.getInstance(tableLines);
     }
 
     @Step
     @Then("User table contain correct values for numbers and users")
     // TODO this will be better with List<MyClass> varName
-    public void checkValues(DataTable dataTable) {
+    public void checkValues(List<TableLine> varName) {
         // TODO you have to create method, that allow us to get the whole Users from table
         // TODO and compare them with expected lists of the Users...
-        List<List<String>> data = dataTable.asLists();
-        int i = 0;
-        for (List<String> line : data) {
-
-            String number = line.get(0);
-            String user = line.get(1);
-
-            if (i == 0) {
-                tableLines.get(i).$$("th").get(Table.Number.index).shouldHave(Condition.text(number));
-                tableLines.get(i).$$("th").get(Table.User.index).shouldHave(Condition.text(user));
-
-            } else {
-                tableLines.get(i).$$("td").get(Table.Number.index).shouldHave(Condition.text(number));
-                tableLines.get(i).$$("td").get(Table.User.index).shouldHave(Condition.text(user));
-            }
-            i++;
+        for (int i = 0; i < varName.size(); i++) {
+            table().getNUMBERS().get(i).shouldHave(Condition.text(varName.get(i).getNumber()));
+            table().getUSERS().get(i).shouldHave(Condition.text(varName.get(i).getUser()));
         }
     }
 
@@ -86,32 +78,21 @@ public class UserTable {
     @Step
     @Then("All cells of 'Description' column contains text")
     // TODO same
-    public void checkDescription(DataTable dataTable) {
-        List<List<String>> data = dataTable.asLists();
-        int i = 0;
-        for (List<String> line : data) {
+    //DONE
+    public void checkDescription(List<TableLine> varName) {
+        for (int i = 0; i < varName.size(); i++) {
+            table().getNUMBERS().get(i).shouldHave(Condition.text(varName.get(i).getNumber()));
+            table().getDESCRIPTIONS().get(i).shouldHave(Condition.text(varName.get(i).getDescription()));
 
-            String number = line.get(0);
-            String user = line.get(1);
-
-            if (i == 0) {
-                tableLines.get(i).$$("th").get(Table.Number.index).shouldHave(Condition.text(number));
-                tableLines.get(i).$$("th").get(Table.Desciption.index).shouldHave(Condition.text(user));
-
-            } else {
-                tableLines.get(i).$$("td").get(Table.Number.index).shouldHave(Condition.text(number));
-                tableLines.get(i).$$("td").get(Table.Desciption.index).shouldHave(Condition.text(user));
-            }
-            i++;
         }
     }
 
     @Step
     @When("I check Description column of Users table")
     public void checkDescription() {
-        tableLines.get(0).$$("th").get(Table.Desciption.index).shouldBe(Condition.visible);
+        tableLines.get(0).$$("th").get(Table.DESCIPTION.index).shouldBe(Condition.visible);
         for (int i = 1; i < tableLines.size(); i++) {
-            tableLines.get(i).$$("td").get(Table.Desciption.index).shouldBe(Condition.visible);
+            tableLines.get(i).$$("td").get(Table.DESCIPTION.index).shouldBe(Condition.visible);
 
         }
     }
@@ -120,7 +101,7 @@ public class UserTable {
     @When("I set 'vip' status to (.*)")
     public void setVIP(String name) {
         for (int i = 1; i < tableLines.size(); i++) {
-            if (tableLines.get(i).$$("td").get(Table.User.index).has(Condition.text(name))) {
+            if (tableLines.get(i).$$("td").get(Table.USER.index).has(Condition.text(name))) {
                 changedVIP = tableLines.get(i).$("[type='checkbox']");
                 changedVIP.click();
             }
@@ -138,22 +119,17 @@ public class UserTable {
     @When("I click on dropdown in column Type for user (.*)")
     public void clickOnDropDown(String name) {
         for (int i = 1; i < tableLines.size(); i++) {
-            if (tableLines.get(i).$$("td").get(Table.User.index).has(Condition.text(name))) {
+            if (tableLines.get(i).$$("td").get(Table.USER.index).has(Condition.text(name))) {
                 openedDropDown = tableLines.get(i).$("select");
                 openedDropDown.click();
             }
         }
+        dropDownOptions = openedDropDown.$$("option");
     }
 
     @Step
     @Then("droplist contains values")
-    public void checkDropDownValues(DataTable dataTable) {
-        List<List<String>> data = dataTable.asLists();
-        List<String> options = new ArrayList<>();
-        for (int i = 1; i < data.size(); i++) {
-            options.add(data.get(i).get(0));
-        }
-        openedDropDown.$$("option").shouldHave(CollectionCondition.texts(options));
+    public void checkDropDownValues(List<String> options) {
+        dropDownOptions.shouldHave(CollectionCondition.texts(options));
     }
-
 }

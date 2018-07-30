@@ -9,14 +9,12 @@ import org.testng.annotations.BeforeSuite;
  * Created by Danila_Morokov on 5/30/2018.
  */
 
-@CucumberOptions(features = "src/test/java/hw6", glue = "hw6/po")
+@CucumberOptions(features = "src/test/java/hw6", glue = {"hw6/po", "hw6/config"})
 public class CucumberTestngRunner extends AbstractTestNGCucumberTests {
 
     @BeforeSuite
     public void beforeSuite() {
         Configuration.browser = "chrome";
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Екатерина\\Documents\\Everything about JAVA\\epam\\EkaterinaSemenova\\src\\main\\resources\\driver\\chromedriver.exe");
-        Configuration.browser = "chrome";
-        Configuration.browserVersion = "2.8"; //2.8/chromedriver_win32.zip
+        Configuration.browserVersion = "2.8";
     }
 }

@@ -6,7 +6,7 @@ package hw6.enums;
 // TODO Code convention ?
 public enum Table {
 
-    Number(0), Type(1), User(2), Desciption(3);
+    NUMBER(0), TYPE(1), USER(2), DESCIPTION(3);
 
     public int index;
 

@@ -4,9 +4,9 @@ package hw6.enums;
  * Created by Екатерина on 18.06.2018.
  */
 public enum CheckBox {
-    WATER (0, "Water"),
-    EARTH (1, "Earth"),
-    WIND (2, "Wind"),
+    WATER(0, "Water"),
+    EARTH(1, "Earth"),
+    WIND(2, "Wind"),
     FIRE(3, "Fire");
 
     public int index;
@@ -17,7 +17,7 @@ public enum CheckBox {
         this.name = name;
     }
 
-    public static CheckBox getCheckBox(String string){
+    public static CheckBox getCheckBox(String string) {
         return valueOf(string.toUpperCase());
     }
 }
