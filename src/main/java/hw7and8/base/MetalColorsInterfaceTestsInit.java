@@ -9,10 +9,7 @@ import java.io.IOException;
 
 import static com.epam.jdi.uitests.core.settings.JDISettings.logger;
 
-// TODO This is not an interface obviously
-// TODO you should not store data here
 public class MetalColorsInterfaceTestsInit extends TestNGBase {
-
     @BeforeSuite(alwaysRun = true)
     public static void setUp() throws IOException {
         WebSite.init(JDISite.class);

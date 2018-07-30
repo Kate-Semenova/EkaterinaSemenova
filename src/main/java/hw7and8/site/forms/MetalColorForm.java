@@ -57,6 +57,7 @@ public class MetalColorForm extends Form<MetalColor> {
         submit.click();
     }
 
+    // TODO dou you read my comment about last data set ??
     public void fillForm(MetalColor metalColor) {
 
         summary.select(metalColor.getSummary());
