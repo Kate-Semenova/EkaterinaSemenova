@@ -2,6 +2,8 @@ package hw4.pageobjects;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import hw4.enums.HeaderMenu;
+import hw4.enums.User;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -13,7 +15,6 @@ import static hw4.enums.Pages.HOME_PAGE;
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
-    private final String URL = HOME_PAGE.url;
     @FindBy(css = ".profile-photo")
     private SelenideElement userIcon;
 
@@ -33,14 +34,14 @@ public class HomePage {
     private SelenideElement serviceDropDown;
 
     @FindBy(css = "a[href='different-elements.html']")
-    SelenideElement differentElementsPageButton;
+    public SelenideElement differentElementsPageButton;
 
     @FindBy(css = ".logout")
     public SelenideElement logOut;
 
     @Step("Open Home Page")
     public void openHomePage() {
-        Selenide.open(URL);
+        Selenide.open(HOME_PAGE.url);
     }
 
     @Step("Check the title")
@@ -49,34 +50,34 @@ public class HomePage {
     }
 
     @Step("Login")
-    public void login(String login, String password) {
+    public void login(User user) {
         userIcon.click();
-        loginInput.sendKeys(login);
-        passwordInput.sendKeys(password);
+        loginInput.sendKeys(user.login);
+        passwordInput.sendKeys(user.password);
         submitButton.click();
     }
 
-    private boolean isLoggedIn() {
-        return !loginInput.isDisplayed();
+    @Step("Open page")
+    public void openPage(HeaderMenu cell) {
+        switch (cell) {
+            case SERVICE: {
+                clickCell(serviceDropDown);
+                break;
+            }
+            case DATES: {
+                openPage(HeaderMenu.SERVICE);
+                clickCell(datesPageButton);
+                break;
+            }
+            case DIFFERENT_ELEMENTS: {
+                openPage(HeaderMenu.SERVICE);
+                clickCell(differentElementsPageButton);
+                break;
+            }
+        }
     }
 
-    @Step("Open dropdown Service")
-    public void openService() {
-        serviceDropDown.shouldBe(visible);
-        serviceDropDown.click();
-    }
-
-    @Step("Open Dates Page by href")
-    public void openDatesPage() {
-        openPage(datesPageButton);
-    }
-
-    @Step("Open Different ElementsPage Page by href")
-    public void openDifferentElementsPage() {
-        openPage(differentElementsPageButton);
-    }
-
-    private void openPage(SelenideElement pageButton) {
+    private void clickCell(SelenideElement pageButton) {
         pageButton.shouldBe(visible);
         pageButton.click();
     }

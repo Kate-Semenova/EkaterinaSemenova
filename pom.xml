@@ -16,6 +16,8 @@
 
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+
+        <webdriver.chrome>src/main/resources/driver/chromedriver.exe</webdriver.chrome>
     </properties>
 
     <dependencies>
@@ -50,6 +52,14 @@
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
         </dependency>
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.seleniumhq.selenium</groupId>-->
+        <!--<artifactId>selenium-chrome-driver</artifactId>-->
+        <!--<version>3.13.0</version>-->
+        <!--</dependency>-->
+
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -179,6 +189,7 @@
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <webdriver.chrome.driver>${webdriver.chrome}</webdriver.chrome.driver>
                     </systemPropertyVariables>
                 </configuration>
                 <dependencies>

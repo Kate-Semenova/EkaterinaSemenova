@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.matchText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.actions;
 
 /**
@@ -20,18 +20,48 @@ public class Dates {
     private SelenideElement slider;
     @FindBy(css = ".logs li")
     private List<SelenideElement> logCollection;
+    private int last = 1;
+
 
     @Step
     public void setHandles(int from, int to) {
-        setHandle(handles.get(0), from);
-        setHandle(handles.get(1), to);
+        int previousFrom = Integer.parseInt(handles.get(0).getText());
+        int previousTo = Integer.parseInt(handles.get(1).getText());
+        if (previousFrom != previousTo) {
+            if (previousTo < from) {
+                setHandle(handles.get(1), to);
+                setHandle(handles.get(0), from);
+                last = 0;
+                return;
+            }
+            if (previousFrom > to) {
+                setHandle(handles.get(0), from);
+                setHandle(handles.get(1), to);
+                last = 1;
+                return;
+            }
+            setHandle(handles.get(0), from);
+            setHandle(handles.get(1), to);
+            last = 1;
+        } else {
+            if (last == 0) {
+                setHandle(handles.get(0), from);
+                setHandle(handles.get(1), to);
+                last = 1;
+            }
+            if (last == 1) {
+                setHandle(handles.get(1), to);
+                setHandle(handles.get(0), from);
+                last = 0;
+            }
+        }
     }
 
     @Step
     public void checkLogsValues(int from, int to) {
         // TODO oh my
-        logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + to + ".*"));
-        logCollection.get(1).should(matchText("\\d\\d:\\d\\d:\\d\\d" + ".*" + from + ".*"));
+        logCollection.get(Math.abs(last - 1)).shouldHave(text("Range 2(To):" + to + " link clicked"));
+        logCollection.get(last).shouldHave(text("Range 2(From):" + from + " link clicked"));
     }
 
     private void setHandle(SelenideElement handle, int value) {

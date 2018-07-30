@@ -1,12 +1,15 @@
 package hw4;
 
+import hw4.enums.HeaderMenu;
 import hw4.pageobjects.Dates;
 import hw4.pageobjects.HomePage;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import listeners.FailesTestAttachmentListener;
-import org.junit.After;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.page;
@@ -24,15 +27,7 @@ public class DatesPageTest extends ServiceSuiteBase {
 
     // TODO what is this ???? could you please show me the place where this "information" used...
     // TODO this name is not so good, actually...
-    @DataProvider
-    public Object[][] information() {
-        return new Object[][]{
-                {0, 100},
-                {0, 0},
-                {100, 100},
-                {30, 70}
-        };
-    }
+    //Sorry.  I haven`t deleted data provider
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
@@ -55,11 +50,12 @@ public class DatesPageTest extends ServiceSuiteBase {
         homePage.checkTitle();
 
         //3 Perform login
-        homePage.login(PITER_CHAILOVSKII.login, PITER_CHAILOVSKII.password);
+        homePage.login(PITER_CHAILOVSKII);
 
         //4 Open through the header menu Service -> Dates Page
-        homePage.openService();
-        homePage.openDatesPage();
+        homePage.openPage(HeaderMenu.DATES);
+//        homePage.openService();
+//        homePage.openDatesPage();
 
         //5 Range sliders
         datesPage.setHandles(0, 100);

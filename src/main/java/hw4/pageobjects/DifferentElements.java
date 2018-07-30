@@ -3,7 +3,7 @@ package hw4.pageobjects;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import hw4.enums.CheckBox;
-import hw4.enums.DropDown;
+import hw4.enums.Colors;
 import hw4.enums.Radio;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
@@ -57,19 +57,6 @@ public class DifferentElements {
         rightSection.shouldBe(visible);
     }
 
-    // TODO tae a look on IDEA warning...
-    @Step
-    public void selectElement(Object... elements) {
-
-        if (elements[0] instanceof DropDown) {
-            selectDropDown((DropDown) elements[0]);
-        }
-        if (elements[0] instanceof Radio) {
-            selectRadio((Radio) elements[0]);
-        }
-
-    }
-
     @Step
     public void selectCheckBoxes(CheckBox... checkBoxes) {
         for (CheckBox checkBox : checkBoxes) {
@@ -81,8 +68,7 @@ public class DifferentElements {
     public void shouldHasCorrectLogRowForCheckBoxes(CheckBox... checkBoxes) {
         for (int i = 0; i < checkBoxes.length; i++) {
             CheckBox checkBox = checkBoxes[checkBoxes.length - 1 - i];
-            logCollection.get(i).should(matchText("\\d\\d:\\d\\d:\\d\\d "
-                    + checkBox.name + ": condition changed to "
+            logCollection.get(i).shouldHave(text(checkBox.name + ": condition changed to "
                     + this.checkBoxes.get(checkBox.index).is(checked)));
         }
     }
@@ -91,14 +77,13 @@ public class DifferentElements {
     public void shouldHasCorrectLogRowForRadio(Radio radio) {
         // TODO indexes. Is that really necessary do include lots of \\d here ???
         // TODO try to find another way, please...
-        logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d metal: value changed to "
-                + radio.name));
+        logCollection.get(0).shouldHave(text("metal: value changed to " + radio.name));
     }
 
     @Step
-    public void shouldHasCorrectLogRowForDropDown(DropDown dropDown) {
+    public void shouldHasCorrectLogRowForDropDown(Colors dropDown) {
         // TODO same
-        logCollection.get(0).should(matchText("\\d\\d:\\d\\d:\\d\\d Colors: value changed to "
+        logCollection.get(0).shouldHave(text("Colors: value changed to "
                 + dropDown.name));
     }
 
@@ -112,7 +97,7 @@ public class DifferentElements {
     }
 
     @Step
-    public void selectDropDown(DropDown dropDownName) {
+    public void selectDropDown(Colors dropDownName) {
         dropDown.click();
         dropDownOptions.get(dropDownName.index).click();
     }

@@ -6,62 +6,67 @@ import com.codeborne.selenide.SelenideElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import hw6.enums.HeaderMenu;
+import hw6.enums.Services;
 import hw6.enums.User;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
-import static hw6.enums.Pages.HOME_PAGE;
+import static com.codeborne.selenide.Selenide.title;
+import static hw6.enums.HeaderMenu.SERVICE;
 
 /**
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
     @FindBy(css = ".sub")
-    public SelenideElement serviceLeftDropDown;
+    private SelenideElement serviceLeftDropDown;
 
     @FindBy(css = "a[href='user-table.html']")
-    public SelenideElement userTablePageButton;
+    private SelenideElement userTablePageButton;
 
     @FindBy(css = ".profile-photo")
-    public SelenideElement userIcon;
+    private SelenideElement userIcon;
     @FindBy(css = "#Name")
-    public SelenideElement loginInput;
+    private SelenideElement loginInput;
 
     @FindBy(css = "#Password")
-    public SelenideElement passwordInput;
+    private SelenideElement passwordInput;
 
     @FindBy(css = ".form-horizontal button[type = 'submit']")
-    public SelenideElement submitButton;
+    private SelenideElement submitButton;
 
     @FindBy(css = ".dropdown-toggle")
-    public SelenideElement serviceHeader;
+    private SelenideElement serviceHeader;
 
     @FindBy(css = "a[href='different-elements.html']")
-    public SelenideElement differentElementsPageButton;
+    private SelenideElement differentElementsPageButton;
 
     @FindBy(css = ".benefit-icon")
-    public ElementsCollection icons;
+    private ElementsCollection icons;
 
     @FindBy(css = ".benefit-txt")
-    public ElementsCollection textsBellow;
+    private ElementsCollection textsBellow;
     @FindBy(css = ".main-content > [class*='main']")
-    public ElementsCollection textsAbove;
+    private ElementsCollection textsAbove;
 
     @FindBy(css = ".logout")
-    public SelenideElement logOut;
+    private SelenideElement logOut;
 
     @FindBy(css = ".dropdown-menu")
-    public SelenideElement serviceHeaderDropDown;
+    private SelenideElement serviceHeaderDropDown;
 
     @FindBy(css = ".fa-caret-down")
-    public SelenideElement serviceLeft;
-
-    private final String URL = HOME_PAGE.url;
+    private SelenideElement serviceLeft;
 
     public HomePage() {
         page(this);
@@ -70,25 +75,13 @@ public class HomePage {
     @Step
     @Given("I am on Home Page")
     public void openHomePage() {
-        Selenide.open(URL);
+        Selenide.open("https://epam.github.io/JDI/" + HeaderMenu.HOME.URL);
     }
 
     @Step
     @Then("The title is correct")
     public void checkTitle() {
-        Assert.assertEquals(Selenide.title(), HOME_PAGE.title);
-    }
-
-    @Step("Login")
-    @When("I perform login as user (.*)/(.*)")
-    public void login(String login, String password) {
-        userIcon.click();
-        if (isLoggedIn()) {
-            logOut.click();
-        }
-        loginInput.sendKeys(login);
-        passwordInput.sendKeys(password);
-        submitButton.click();
+        Assert.assertEquals(Selenide.title().toUpperCase(), HeaderMenu.HOME.TITTLE);
     }
 
     @Step("Login")
@@ -121,24 +114,27 @@ public class HomePage {
     }
 
     @Step
-    @When("I click oh Service subcategory in the header")
-    @Given("I open through the header menu Service")
-    public void clickServiceHeader() {
-        serviceHeader.shouldBe(visible);
-        serviceHeader.click();
+    @When("I click on Service subcategory in the (.*)")
+    public void clickServiceHeader(String position) {
+        if (position.equals("header")) {
+            clickCell(serviceHeader);
+        }
+        if (position.equals("left")) {
+            clickCell(serviceLeft);
+        }
     }
 
-    @Step
-    @When("I click on Service subcategory in the left section")
-    public void clickServiceLeft() {
-        serviceLeft.shouldBe(visible);
-        serviceLeft.click();
+    private void clickCell(SelenideElement pageButton) {
+        pageButton.shouldBe(visible);
+        pageButton.click();
     }
+
 
     @Step
     @Then("(.+) drop down contains options")
     public void checkTheOptions(String position) {
         SelenideElement dropDown = null;
+
         if (position.equals("Header")) {
             dropDown = serviceHeaderDropDown;
         }
@@ -146,32 +142,36 @@ public class HomePage {
             dropDown = serviceLeftDropDown;
         }
         // TODO NPE ?
-        dropDown.shouldBe(visible);
-        for (SelenideElement element : dropDown.$$("li")) {
-            element.shouldBe(visible);
+        if (dropDown != null && dropDown.is(visible)) {
+            for (SelenideElement element : dropDown.$$("li")) {
+                element.shouldBe(visible);
+            }
+            // TODO ENUM ?
+            List<String> texts = Arrays.stream(Services.values()).map(service -> service.text).collect(Collectors.toList());
+            dropDown.$$("li").shouldHave(texts(texts));
         }
-        // TODO ENUM ?
-        dropDown.$$("li").shouldHave(texts("SUPPORT", "DATES", "COMPLEX TABLE", "SIMPLE TABLE", "USER TABLE", "TABLE WITH PAGES", "DIFFERENT ELEMENTS", "PERFORMANCE"));
     }
 
     @Step()
-    @Given("I open User Table Page through the header menu Service -> User Table")
-    public void openUserTablePage() {
-        openPage(userTablePageButton);
-    }
-
-    @Step("Open Different ElementsPage Page by href")
-    @Given("I open Different Elements Page")
-    public void openDifferentElementsPage() {
-        openPage(differentElementsPageButton);
-    }
-
-
-    private void openPage(SelenideElement pageButton) {
-        if (!pageButton.isDisplayed()) {
-            serviceHeader.click();
+    @Given("I open (.*) Page through the header menu")
+    public void openPage(String pageName) {
+        HeaderMenu cell = HeaderMenu.MAP.get(pageName.toUpperCase());
+        switch (cell) {
+            case SERVICE: {
+                clickCell(serviceHeader);
+                break;
+            }
+            case USER_TABLE: {
+                openPage(SERVICE.NAME);
+                clickCell(userTablePageButton);
+                break;
+            }
+            case DIFFERENT_ELEMENTS: {
+                openPage(SERVICE.NAME);
+                clickCell(differentElementsPageButton);
+                break;
+            }
         }
-        pageButton.click();
     }
 
     private boolean isLoggedIn() {

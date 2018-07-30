@@ -30,8 +30,4 @@ public class FailesTestAttachmentListener extends TestListenerAdapter {
         makeScreenshot();
     }
 
-   // @Override
-  //  public void onTestSuccess(ITestResult tr) {
-  //      makeScreenshot();
-  //  }
 }

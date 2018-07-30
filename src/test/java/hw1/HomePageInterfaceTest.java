@@ -16,7 +16,6 @@ import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Ekaterina on 23.05.2018.
- *
  */
 public class HomePageInterfaceTest {
     private String title = "Home Page";
@@ -46,7 +45,7 @@ public class HomePageInterfaceTest {
         driver.findElement(By.cssSelector("#Password")).sendKeys("1234");
         driver.findElement(By.cssSelector(".form-horizontal button[type = 'submit']")).click();
 
-        //5 Assert User name in the left-top side of screen that user is logged in
+        //5 Assert USER name in the left-top side of screen that user is logged in
         WebElement userName = driver.findElement(By.cssSelector(".profile-photo span"));
         assertEquals(userName.getText(), "PITER CHAILOVSKII");
 
@@ -98,10 +97,10 @@ public class HomePageInterfaceTest {
         assertEquals(centerTexts.get(0).getText(), "EPAM FRAMEWORK WISHES…");
         assertEquals(centerTexts.get(1).getText(),
                 "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISICING ELIT, " +
-                "SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. " +
-                "UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS " +
-                "NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN " +
-                "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
+                        "SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. " +
+                        "UT ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS " +
+                        "NISI UT ALIQUIP EX EA COMMODO CONSEQUAT DUIS AUTE IRURE DOLOR IN " +
+                        "REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
         assertEquals(centerTexts.get(2).getText(), "JDI GITHUB");
 
         //12 Assert that JDI GITHUB is a link and has a proper URL
@@ -117,7 +116,8 @@ public class HomePageInterfaceTest {
         //15 Close Browser
         driver.close();
     }
-//nafig ne nuzhen
+
+    //nafig ne nuzhen
     private void checkTitle(WebDriver driver, String title) {
         assertEquals(driver.getTitle(), title);
     }

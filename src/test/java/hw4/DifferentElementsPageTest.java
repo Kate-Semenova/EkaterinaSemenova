@@ -14,7 +14,8 @@ import static com.codeborne.selenide.Selenide.close;
 import static com.codeborne.selenide.Selenide.page;
 import static hw4.enums.CheckBox.WATER;
 import static hw4.enums.CheckBox.WIND;
-import static hw4.enums.DropDown.YELLOW;
+import static hw4.enums.Colors.YELLOW;
+import static hw4.enums.HeaderMenu.DIFFERENT_ELEMENTS;
 import static hw4.enums.Radio.SELEN;
 import static hw4.enums.User.PITER_CHAILOVSKII;
 
@@ -50,13 +51,14 @@ public class DifferentElementsPageTest extends ServiceSuiteBase {
 
         //3 Perform login
         // TODO why don't you pass just a PITER_CHAILOVSKII to this method ??
-        homePage.login(PITER_CHAILOVSKII.login, PITER_CHAILOVSKII.password);
+        // I can, it was the first implementation: login(login, password)
+        homePage.login(PITER_CHAILOVSKII);
 
         //4 Open through the header menu Service -> Different Elements Page
         // TODO this will be better with parameter.
         // TODO you have to create one single method that allow us to opne any kind of pages...
-        homePage.openService();
-        homePage.openDifferentElementsPage();
+        //DONE for pages that I use
+        homePage.openPage(DIFFERENT_ELEMENTS);
 
         //5 Check interface on Different elements page, it contains all needed elements
         differentElementPage.shouldHasAllNeededElements();

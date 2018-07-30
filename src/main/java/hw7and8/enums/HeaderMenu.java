@@ -8,19 +8,26 @@ import lombok.Getter;
 @Getter
 // TODO Code convention !
 public enum HeaderMenu {
-    HOME("Home"),
-    CONTACT_FORM("Contact form"),
-    SERVICE("Service"),
-    METALS_N_COLORS("Metals & Colors");
+    HOME("HOME"),
+    CONTACT_FORM("CONTACT FORM"),
+    SERVICE("SERVICE"),
+    METALS_N_COLORS("METALS & COLORS");
 
-    private final String value;
+    public final String title;
 
     HeaderMenu(String value) {
-        this.value = value;
+        this.title = value;
     }
 
     @Override
     public String toString() {
-        return value;
+        return title;
+    }
+
+    public static void main(String[] args) {
+        for (HeaderMenu str : HeaderMenu.values()
+                ) {
+
+        }
     }
 }
