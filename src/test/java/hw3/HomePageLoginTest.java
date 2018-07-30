@@ -19,7 +19,7 @@ public class HomePageLoginTest extends TestBase {
     private HomePage homePage;
     private WebDriver driver;
 
-    // TODO you should not ini WebDriver here...
+    // you should not ini WebDriver here...
     @BeforeClass(alwaysRun = true)
     public void setUpClass() {
         HashMap<String, Object> chromePrefs = new HashMap<>();
@@ -38,13 +38,13 @@ public class HomePageLoginTest extends TestBase {
     }
 
     @Test
-    // TODO thats not really gooad approach to pass vars by xml parameters, but OKAY...
+    // thats not really gooad approach to pass vars by xml parameters, but OKAY...
     // Actually I thought it was a task, and btw wanted to try this option of testNG
     @Parameters({"login", "password", "name"})
     public void shouldPerformLoggingInCorrectly(String login, String password, String name) {
 
-        // TODO this is completely prohibited to pass driver in PO method !!
-        // TODO you can just create appropriate constructor and store link of the driver there.
+        // this is completely prohibited to pass driver in PO method !!
+        // you can just create appropriate constructor and store link of the driver there.
         //we actually did it in class.          homePage.open(driver);
         //But okay, I managed how to do it
         //2 Open test site by URL

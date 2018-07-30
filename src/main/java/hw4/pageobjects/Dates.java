@@ -59,7 +59,6 @@ public class Dates {
 
     @Step
     public void checkLogsValues(int from, int to) {
-        // TODO oh my
         logCollection.get(Math.abs(last - 1)).shouldHave(text("Range 2(To):" + to + " link clicked"));
         logCollection.get(last).shouldHave(text("Range 2(From):" + from + " link clicked"));
     }

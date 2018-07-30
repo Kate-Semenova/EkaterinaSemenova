@@ -25,10 +25,6 @@ public class DatesPageTest extends ServiceSuiteBase {
     private Dates datesPage;
     private HomePage homePage;
 
-    // TODO what is this ???? could you please show me the place where this "information" used...
-    // TODO this name is not so good, actually...
-    //Sorry.  I haven`t deleted data provider
-
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         homePage = page(HomePage.class);
@@ -54,8 +50,6 @@ public class DatesPageTest extends ServiceSuiteBase {
 
         //4 Open through the header menu Service -> Dates Page
         homePage.openPage(HeaderMenu.DATES);
-//        homePage.openService();
-//        homePage.openDatesPage();
 
         //5 Range sliders
         datesPage.setHandles(0, 100);
