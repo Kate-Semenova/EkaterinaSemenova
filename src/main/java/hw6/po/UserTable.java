@@ -26,15 +26,13 @@ import static com.codeborne.selenide.WebDriverRunner.url;
  */
 public class UserTable {
     @FindBy(css = "tbody > tr")
-    public ElementsCollection tableLines;
+    private ElementsCollection tableLines;
 
     @FindBy(css = ".logs > li")
-    public ElementsCollection logs;
+    private ElementsCollection logs;
 
     private SelenideElement changedVIP;
-
     private SelenideElement openedDropDown;
-
     private ElementsCollection dropDownOptions;
 
     public UserTable() {

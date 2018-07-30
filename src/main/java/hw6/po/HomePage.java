@@ -29,44 +29,44 @@ import static hw6.enums.HeaderMenu.SERVICE;
  */
 public class HomePage {
     @FindBy(css = ".sub")
-    public SelenideElement serviceLeftDropDown;
+    private SelenideElement serviceLeftDropDown;
 
     @FindBy(css = "a[href='user-table.html']")
-    public SelenideElement userTablePageButton;
+    private SelenideElement userTablePageButton;
 
     @FindBy(css = ".profile-photo")
-    public SelenideElement userIcon;
+    private SelenideElement userIcon;
     @FindBy(css = "#Name")
-    public SelenideElement loginInput;
+    private SelenideElement loginInput;
 
     @FindBy(css = "#Password")
-    public SelenideElement passwordInput;
+    private SelenideElement passwordInput;
 
     @FindBy(css = ".form-horizontal button[type = 'submit']")
-    public SelenideElement submitButton;
+    private SelenideElement submitButton;
 
     @FindBy(css = ".dropdown-toggle")
-    public SelenideElement serviceHeader;
+    private SelenideElement serviceHeader;
 
     @FindBy(css = "a[href='different-elements.html']")
-    public SelenideElement differentElementsPageButton;
+    private SelenideElement differentElementsPageButton;
 
     @FindBy(css = ".benefit-icon")
-    public ElementsCollection icons;
+    private ElementsCollection icons;
 
     @FindBy(css = ".benefit-txt")
-    public ElementsCollection textsBellow;
+    private ElementsCollection textsBellow;
     @FindBy(css = ".main-content > [class*='main']")
-    public ElementsCollection textsAbove;
+    private ElementsCollection textsAbove;
 
     @FindBy(css = ".logout")
-    public SelenideElement logOut;
+    private SelenideElement logOut;
 
     @FindBy(css = ".dropdown-menu")
-    public SelenideElement serviceHeaderDropDown;
+    private SelenideElement serviceHeaderDropDown;
 
     @FindBy(css = ".fa-caret-down")
-    public SelenideElement serviceLeft;
+    private SelenideElement serviceLeft;
 
     public HomePage() {
         page(this);

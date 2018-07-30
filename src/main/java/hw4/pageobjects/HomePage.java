@@ -57,10 +57,6 @@ public class HomePage {
         submitButton.click();
     }
 
-    private boolean isNotLoggedIn() {
-        return loginInput.isDisplayed();
-    }
-
     @Step("Open page")
     public void openPage(HeaderMenu cell) {
         switch (cell) {

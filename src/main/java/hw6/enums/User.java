@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public enum User {
     PITER_CHAILOVSKII("epam", "1234", "PITER CHAILOVSKII");
+
     public String login;
     public String password;
     public String name;

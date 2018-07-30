@@ -25,7 +25,7 @@ public class DataTableConfigurer implements TypeRegistryConfigurer {
             @Override
             public TableLine transform(Map<String, String> entry) {
                 return new TableLine(entry.get("Number"), entry.get("Type"),
-                        entry.get("Desciption"), entry.get("User"));
+                        entry.get("Desciption"), entry.get("User")); //Did not change spelling because it was in task
             }
         }));
         registry.defineDataTableType(new DataTableType(String.class, new TableEntryTransformer<String>() {

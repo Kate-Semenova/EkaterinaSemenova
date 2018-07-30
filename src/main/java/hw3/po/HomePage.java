@@ -19,6 +19,7 @@ import static org.testng.Assert.assertTrue;
  * Created by Ekaterina on 01.06.2018.
  */
 public class HomePage {
+    public final String URL = "https://github.com/epam/JDI";
     private WebDriver driver;
     // TODO what bout enums ?
     private final String title = HOME_PAGE.title;
@@ -135,7 +136,7 @@ public class HomePage {
         // TODO you should not get elements by indexes, that's really bad approach
         // TODO @FindBy required...
         //DONE
-        assertEquals(jdiGithub.getAttribute("href"), "https://github.com/epam/JDI");
+        assertEquals(jdiGithub.getAttribute("href"), URL);
     }
 
 }
