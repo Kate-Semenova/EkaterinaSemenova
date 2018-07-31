@@ -147,6 +147,8 @@ public class HomePage {
             }
             List<String> texts = Arrays.stream(Services.values()).map(service -> service.text).collect(Collectors.toList());
             dropDown.$$("li").shouldHave(texts(texts));
+        } else {
+            throw new IllegalArgumentException("Check the value in step definition");
         }
     }
 
