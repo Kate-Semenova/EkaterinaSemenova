@@ -1,18 +1,12 @@
 Feature: Data Page Interface
-# TODO could you please format this file!
   Scenario: Data Page test
     Given I am on Home Page
     Then The title is correct
 
-  # TODO this step should be looks like
-  # TODO I perform login as user PITER CHAILOVSKII
-    #I thought this "I perform login as user epam/1234" was in the task, but of course I can change it
     When I am logged in as PITER CHAILOVSKII
     Then The user name is PITER CHAILOVSKII
     And The interface on Home page, contains all needed elements
 
-  # TODO you have to create one single step for opening any kind of pages...
-    #Did it for pages(Service is not a page actually)
     When I click on Service subcategory in the header
     Then Header drop down contains options
 

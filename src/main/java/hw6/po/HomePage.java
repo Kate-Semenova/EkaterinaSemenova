@@ -95,9 +95,7 @@ public class HomePage {
         loginInput.sendKeys(user.login);
         passwordInput.sendKeys(user.password);
         submitButton.click();
-
     }
-
 
     @Step
     @Then("The user name is (.*)")
@@ -142,11 +140,11 @@ public class HomePage {
             dropDown = serviceLeftDropDown;
         }
         // TODO NPE ?
+        // TODO whats happen if dropDown == null ?
         if (dropDown != null && dropDown.is(visible)) {
             for (SelenideElement element : dropDown.$$("li")) {
                 element.shouldBe(visible);
             }
-            // TODO ENUM ?
             List<String> texts = Arrays.stream(Services.values()).map(service -> service.text).collect(Collectors.toList());
             dropDown.$$("li").shouldHave(texts(texts));
         }

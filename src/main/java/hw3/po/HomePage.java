@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 public class HomePage {
     public final String URL = "https://github.com/epam/JDI";
     private WebDriver driver;
-    // TODO what bout enums ?
+
     private final String title = HOME_PAGE.title;
     @FindBy(css = ".profile-photo")
     private WebElement userIcon;
@@ -84,8 +84,8 @@ public class HomePage {
     }
 
     public void checkNavigationBar() {
-        // TODO you have to create something for store the list of page's name
-        // TODO it will be better with cycle...
+        // you have to create something for store the list of page's name
+        // it will be better with cycle...
         //DONE
         assertEquals(navigateBarElements.size(), 4);
         for (int i = 0; i < navigateBarElements.size(); i++) {
@@ -108,7 +108,7 @@ public class HomePage {
         for (int i = 0; i < texts.size(); i++) {
             assertEquals(texts.get(i).getText(), BenefitTexts.values()[i].text);
         }
-        // TODO same, 75 str
+        // same, 75 str
         //DONE
     }
 
@@ -125,7 +125,7 @@ public class HomePage {
     }
 
     public void checkTextsOnMainHeader() {
-        // TODO same, 75 str
+        // same, 75 str
         //DONe
         for (int i = 0; i < centerTexts.size(); i++) {
             assertEquals(centerTexts.get(i).getText(), CentralTexts.values()[i].text);
@@ -133,8 +133,8 @@ public class HomePage {
     }
 
     public void checkJDILink() {
-        // TODO you should not get elements by indexes, that's really bad approach
-        // TODO @FindBy required...
+        // you should not get elements by indexes, that's really bad approach
+        // @FindBy required...
         //DONE
         assertEquals(jdiGithub.getAttribute("href"), URL);
     }
