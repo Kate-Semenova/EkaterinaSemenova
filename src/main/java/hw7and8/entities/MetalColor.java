@@ -3,10 +3,13 @@ package hw7and8.entities;
 import hw7and8.base.MetalColorsInterfaceTestsInit;
 import hw7and8.utils.JSONReader;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import static com.epam.jdi.uitests.core.settings.JDISettings.logger;
@@ -17,49 +20,13 @@ import static com.epam.jdi.uitests.core.settings.JDISettings.logger;
  */
 @ToString
 @Getter
+@Setter
 public class MetalColor {
     private int[] summary;
     private String[] elements;
     private String color;
     private String metals;
     private String[] vegetables;
-
-    public final static MetalColor DEFAULT = new MetalColor("parametersForHW7.properties");
-    // TODO No! Why don't you create especial file for store&loading data ? This should not be here...
-    public final static MetalColor[][] DEFAULT_FROM_JSON = JSONReader.getInstance().getDataFromJSON();
-
-    // TODO what is this method doing here ? Oh my...
-    public MetalColor(String file) {
-        Properties properties = new Properties();
-        logger.info("Read property " + file);
-        try {
-            properties.load(MetalColorsInterfaceTestsInit.class.getClassLoader().getResourceAsStream(file));
-            logger.info("Initialising data from " + file);
-
-            color = (properties.getProperty("color"));
-            metals = (properties.getProperty("metal"));
-            summary = new int[2];
-            summary[0] = Integer.parseInt(properties.getProperty("odd"));
-            summary[1] = Integer.parseInt(properties.getProperty("even"));
-            String elementList = properties.getProperty("elements");
-
-            elements = new String[elementList.split(", ").length];
-            int i = 0;
-            for (String elementName : elementList.split(", ")) {
-                elements[i] = elementName;
-                i++;
-            }
-            String vegetablesList = properties.getProperty("salad");
-            vegetables = new String[vegetablesList.split(", ").length];
-            i = 0;
-            for (String vegetableName : vegetablesList.split(", ")) {
-                vegetables[i] = vegetableName;
-                i++;
-            }
-        } catch (IOException e) {
-            logger.info("Cant initialise data from " + file);
-        }
-    }
 
     public int sum() {
         if (summary.length == 2) {
@@ -69,5 +36,28 @@ public class MetalColor {
         }
     }
 
+    public List<String> listOfData() {
+        List<String> strings = new ArrayList<>();
+        strings.add(Integer.toString(sum()));
+        strings.add(color);
+        strings.add(metals);
+        strings.add(Arrays.toString(vegetables).substring(1, Arrays.toString(vegetables).length() - 1));
+        strings.add(Arrays.toString(elements).substring(1, Arrays.toString(elements).length() - 1));
 
+        return strings;
+    }
+
+    public enum ListOfLog {
+        SUMMARY("Summary: "),
+        COLOR("Color: "),
+        METAL("Metal: "),
+        VEGETABLES("Vegetables: "),
+        ELEMENTS("Elements: ");
+
+        public final String logText;
+
+        ListOfLog(String logText) {
+            this.logText = logText;
+        }
+    }
 }

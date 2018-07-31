@@ -18,7 +18,7 @@ import java.util.Map;
 public class JSONReader {
     private static JSONReader instance;
     private MetalColor[][] dataFromJSON;
-    public Map<String, MetalColor> map = new HashMap<>();
+    private Map<String, MetalColor> map = new HashMap<>();
 
     public final static String FILE_NAME = "src\\test\\resources\\JDI_ex8_metalsColorsDataSet.json";
 

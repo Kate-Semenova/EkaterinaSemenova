@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by Ekaterina on 27.07.2018.
  */
-public class Page extends WebPage {
+public class  Page extends WebPage {
     @FindBy(css = "header")
     public Header header;
 

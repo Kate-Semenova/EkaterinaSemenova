@@ -7,7 +7,9 @@ import hw7and8.entities.MetalColor;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 //import org.testng.Assert;
 
@@ -31,32 +33,23 @@ public class Result extends Section {
     @FindBy(css = ".elem-res")
     public Label elementResult;
 
+    public List<Label> listOfLabels() {
+        List<Label> l = new ArrayList<>();
+        l.add(summaryResult);
+        l.add(colorResult);
+        l.add(metalResult);
+        l.add(saladResult);
+        l.add(elementResult);
+        return l;
+    }
 
     @Step
     // TODO it will be better with loop
+    //like this?
     public void checkTextInLog(MetalColor data) {
-        String elements = Arrays.toString(data.getElements());
-        String vegetables = Arrays.toString(data.getVegetables());
-        Assert.areEquals(summaryResult.getText(), "Summary: " + data.sum());
-
-        if (!data.getColor().equals("")) {
-            Assert.areEquals(colorResult.getText(), "Color: " + data.getColor());
-        } else {
-            Assert.areEquals(colorResult.getText(), "Color: Colors");
-        }
-        if (!data.getMetals().equals("")) {
-            Assert.areEquals(metalResult.getText(), "Metal: " + data.getMetals());
-        } else {
-            Assert.areEquals(metalResult.getText(), "Metal: Metals");
-        }
-        if (data.getVegetables().length != 0) {
-            Assert.areEquals(saladResult.getText(), "Vegetables: " + vegetables.substring(1, vegetables.length() - 1));
-        } else {
-            Assert.areEquals(saladResult.getText(), "Vegetables: Vegetables");
-        }
-
-        if (data.getElements().length != 0) {
-            Assert.areEquals(elementResult.getText(), "Elements: " + elements.substring(1, elements.length() - 1));
+        List<Label> list = listOfLabels();
+        for (int i = 0; i < list.size(); i++) {
+            Assert.areEquals(list.get(i).getText(), MetalColor.ListOfLog.values()[i].logText + data.listOfData().get(i));
         }
     }
 }

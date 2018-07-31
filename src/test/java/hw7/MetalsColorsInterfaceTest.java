@@ -4,6 +4,7 @@ package hw7;
 import hw7and8.base.MetalColorsInterfaceTestsInit;
 import hw7and8.entities.MetalColor;
 import hw7and8.entities.User;
+import hw7and8.utils.MetalColorData;
 import org.testng.annotations.Test;
 
 import static hw7and8.enums.HeaderMenu.METALS_N_COLORS;
@@ -27,13 +28,13 @@ public class MetalsColorsInterfaceTest extends MetalColorsInterfaceTestsInit {
         //Fill form Metals & Colors :
         // TODO you should use Entity Driving Testing approach !!
         // DONE ***okey, somehow never thought of metalcolor as a form.
-        metalsColorsPage.fillForm(MetalColor.DEFAULT);
+        metalsColorsPage.fillForm(MetalColorData.DEFAULT);
 
         //Submit form Metals & Colors
         metalsColorsPage.submitChanges();
 
         //Result section contains certain data
-        metalsColorsPage.result.checkTextInLog(MetalColor.DEFAULT);
+        metalsColorsPage.result.checkTextInLog(MetalColorData.DEFAULT);
         // !TODO
     }
 }

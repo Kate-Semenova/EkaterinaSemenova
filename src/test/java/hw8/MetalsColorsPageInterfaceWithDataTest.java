@@ -3,6 +3,7 @@ package hw8;
 import hw7and8.base.MetalColorsInterfaceTestsInit;
 import hw7and8.entities.MetalColor;
 import hw7and8.entities.User;
+import hw7and8.utils.MetalColorData;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -20,8 +21,8 @@ public class MetalsColorsPageInterfaceWithDataTest extends MetalColorsInterfaceT
 
     @DataProvider
     // TODO FNFE really ??
-    public Object[][] getData() throws FileNotFoundException {
-        return MetalColor.DEFAULT_FROM_JSON;
+    public Object[][] getData() {
+        return MetalColorData.DEFAULT_FROM_JSON;
     }
 
     @Test(dataProvider = "getData")
